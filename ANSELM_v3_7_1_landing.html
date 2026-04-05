@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ═══════════ PRIMARY META ═══════════ -->
+<title>ANSELM — Free Browser Strategy Game | No Download Required</title>
+<meta name="description" content="ANSELM is a free single-file browser game. Guide five dying civilisations through spreading Goo corruption. No download, no install — open in any browser and play. Features the Daedalus Codex, genetics engine, procedural audio, and 16,200+ lines of vanilla JS.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="Indie Developer, Austin TX">
+<meta name="keywords" content="free browser game, HTML5 game no download, indie strategy game, pixel art game, survival strategy game, civilization building game, single file game, free indie game, play in browser">
+<link rel="canonical" href="https://yourdomain.com/ANSELM"> <!-- ← update with your live URL -->
+
+<!-- ═══════════ OPEN GRAPH (Facebook, Discord, Slack previews) ═══════════ -->
+<meta property="og:type"        content="website">
+<meta property="og:title"       content="ANSELM — A Free Browser Strategy Game">
+<meta property="og:description" content="Five dying realms. One Traveller. A spreading corruption. Free single-file HTML5 game — no download, no install. Open in any browser and play immediately.">
+<meta property="og:image"       content="https://yourdomain.com/anselm-preview.png"> <!-- ← replace with a 1200×630 screenshot -->
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt"   content="ANSELM game — five realms floating in space with the Nexus Eye burning at the centre">
+<meta property="og:url"         content="https://yourdomain.com/ANSELM">
+<meta property="og:site_name"   content="ANSELM">
+<meta property="og:locale"      content="en_US">
+
+<!-- ═══════════ TWITTER / X CARD ═══════════ -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="ANSELM — Free Browser Strategy Game">
+<meta name="twitter:description" content="Guide five dying civilisations against a spreading Goo corruption. Free, single HTML file, no install. Open in any browser and play.">
+<meta name="twitter:image"       content="https://yourdomain.com/anselm-preview.png">
+<meta name="twitter:image:alt"   content="ANSELM game — the Nexus Eye rising over a realm">
+
+<!-- ═══════════ FAVICON (SVG data URI — no external file needed) ═══════════ -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%2303030a'/><text x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='20' fill='%23c8a0e8'>A</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%2303030a'/><text x='90' y='130' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='120' fill='%23c8a0e8'>A</text></svg>">
+
+<!-- ═══════════ PERFORMANCE HINTS ═══════════ -->
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" as="script" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<!-- ═══════════ JSON-LD STRUCTURED DATA — VideoGame schema ═══════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "ANSELM",
+  "description": "ANSELM is a free single-file HTML5 browser game. Play as the Traveller guiding five dying civilisations through spreading Goo corruption. Features a 10-trait genetics engine, procedurally generated maps and audio, five unique realms, and a full weapon-forging system. Requires no download or installation.",
+  "url": "https://yourdomain.com/ANSELM",
+  "image": "https://yourdomain.com/anselm-preview.png",
+  "gamePlatform": ["Web Browser", "HTML5"],
+  "applicationCategory": "Game",
+  "applicationSubCategory": "Strategy Game",
+  "operatingSystem": "Any (browser-based)",
+  "softwareVersion": "3.7.0",
+  "releaseNotes": "v3.7.0 — Daedalus Codex Update: Chamber Room tutorial, full in-game encyclopedia, World Events, Edict System, Town Founding, Diplomacy, Realm Tension and War Escalation, meta-progression across runs, Native Quests, Named Artifacts.",
+  "genre": ["Survival", "Strategy", "Indie", "Simulation", "Pixel Art"],
+  "numberOfPlayers": {
+    "@type": "QuantitativeValue",
+    "minValue": 1,
+    "maxValue": 1
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0.00",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "description": "Free to download and play. Single HTML file, no account required."
+  },
+  "author": {
+    "@type": "Person",
+    "description": "Indie developer focused on pixel art, web development, and AI",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Austin",
+      "addressRegion": "TX",
+      "addressCountry": "US"
+    }
+  },
+  "keywords": "free browser game, HTML5 strategy game, no download, indie game, pixel art, civilization builder, survival game, genetics engine, procedural generation, daedalus codex",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "featureList": [
+    "10-trait genetic inheritance engine with 50/50 parent blending and 15% mutation",
+    "Five unique realms: Ashveil, Thalassorn, Verdekai, Solenthar, Umbrakor",
+    "Civilisation ages from Primitive through Heaven to the Grid Awakening",
+    "Procedurally generated maps using seeded Perlin noise",
+    "Fully procedural audio — no audio files, generated live via Web Audio API",
+    "Weapon forging system: five realm weapons combinable into the Ultimate Weapon",
+    "Daedalus Codex — full in-game encyclopedia: Natives, Dimensions, Forge, Mining, Genetics, Civilisation, Lux in Tenebris (full text with prev/next navigation)",
+    "Chamber Room — pre-game tutorial with Fairy Fountain ambient music (D major, 6/8, OoT-accurate)",
+    "World Events — meteor strikes, dimensional storms, migrations, and eclipses",
+    "Edict System — issue four types of royal decrees using loyalty points",
+    "Town Founding — found new settlements with loyal native labor",
+    "Diplomacy System — inter-dimensional alliances and rivalries",
+    "Realm Tension and War Escalation — five war levels, raid parties, resolution at Age 9",
+    "Meta-progression — ancestors, Heaven memory, Codex progress, and named artifacts persist across runs",
+    "Native Quests — stone delivery, escort, and travel quests",
+    "16200+ lines of vanilla JavaScript in a single HTML file",
+    "Works completely offline"
+  ]
+}
+</script>
+<style>
+:root {
+  --dim1:#c9919a; --dim2:#8aabbe; --dim3:#8ab89a;
+  --dim4:#c4b89a; --dim5:#a891c4;
+  --teal:#00dcc0; --teal-d:#00a890;
+  --ink:#03030a; --silver:#c0c8d8; --gold:#e8c060;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;background:var(--ink);overflow-x:hidden}
+/* ── Visually hidden: readable by crawlers and screen readers, invisible to users ── */
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#scroll-space{height:8600px}
+#c{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;display:block}
+
+/* ── Title Banner (persists through scroll) ── */
+#tbanner{
+  position:fixed;top:0;left:0;right:0;z-index:30;
+  text-align:center;padding:28px 20px 20px;
+  background:linear-gradient(to bottom,rgba(3,3,10,.82) 0%,transparent 100%);
+  pointer-events:none;
+  transition:opacity .5s;
+}
+.tb-eye{
+  font-family:'Share Tech Mono',monospace;font-size:.58rem;
+  letter-spacing:.45em;text-transform:uppercase;
+  color:rgba(200,160,232,.55);margin-bottom:8px;
+  transition:color .8s;
+}
+.tb-title{
+  font-family:'Cinzel',serif;font-size:clamp(3rem,9vw,7rem);
+  font-weight:900;letter-spacing:.12em;line-height:1;
+  background:linear-gradient(175deg,#fff 0%,var(--silver) 40%,var(--dim5) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  transition:filter .8s;
+  filter:drop-shadow(0 0 40px rgba(168,145,196,.5));
+}
+.tb-sub{
+  font-family:'Crimson Pro',serif;font-size:clamp(.8rem,1.4vw,1rem);
+  font-weight:300;font-style:italic;
+  color:rgba(192,200,216,.55);margin-top:6px;letter-spacing:.05em;
+  transition:opacity .5s;
+}
+
+/* ── Scroll hint ── */
+#shint{
+  position:fixed;bottom:38px;left:50%;transform:translateX(-50%);
+  z-index:30;pointer-events:none;
+  font-family:'Share Tech Mono',monospace;font-size:.58rem;
+  letter-spacing:.38em;color:rgba(200,195,200,.32);
+  animation:hpulse 2.4s ease-in-out infinite;
+}
+@keyframes hpulse{0%,100%{opacity:.25}50%{opacity:.8}}
+
+/* ── Base overlay ── */
+.ov{
+  position:fixed;top:0;left:0;width:100%;height:100%;z-index:10;
+  pointer-events:none;opacity:0;transition:opacity .3s;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+
+/* ── Hero ── */
+#hero{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-end;
+  padding-bottom:18vh;
+}
+.hero-hint{
+  margin-top:42px;font-family:'Crimson Pro',serif;font-size:1.1rem;
+  font-weight:300;font-style:italic;color:rgba(192,200,216,.6);
+  max-width:480px;line-height:1.7;text-align:center;
+}
+
+/* ── Realm overlays ── */
+.rov{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  z-index:10;pointer-events:none;opacity:0;transition:opacity .35s;
+  display:flex;align-items:flex-end;justify-content:center;
+  padding-bottom:10vh;
+}
+.rpanel{
+  max-width:480px;width:88%;text-align:center;
+  padding:36px 28px;
+  background:radial-gradient(ellipse at center, rgba(3,3,10,.78) 20%, transparent 80%);
+}
+.rnum{
+  font-family:'Share Tech Mono',monospace;font-size:.58rem;
+  letter-spacing:.42em;text-transform:uppercase;
+  color:var(--rc);margin-bottom:10px;
+}
+.rname{
+  font-family:'Cinzel',serif;font-size:clamp(2rem,5.5vw,3.6rem);
+  font-weight:900;letter-spacing:.07em;color:#fff;
+  text-shadow:0 0 55px var(--rc);margin-bottom:16px;
+  line-height:1;
+}
+.rbody{
+  font-family:'Crimson Pro',serif;font-size:1.02rem;
+  font-weight:300;color:rgba(228,218,220,.84);
+  line-height:1.85;margin-bottom:16px;
+}
+.rchip{
+  display:inline-block;
+  font-family:'Share Tech Mono',monospace;font-size:.58rem;
+  letter-spacing:.18em;padding:5px 13px;
+  border:1px solid var(--rc);color:var(--rc);
+  margin-right:6px;margin-top:4px;
+}
+
+/* ── Daedalus Codex ── */
+#codex{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(2,4,18,.98);
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  pointer-events:all;touch-action:auto;
+  font-family:'Share Tech Mono',monospace;
+  opacity:0;transition:opacity .5s;
+}
+#codex.vis{display:flex}
+#codex.opaque{opacity:1}
+#codex-inner{
+  width:min(560px,94vw);
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;gap:0;
+}
+.cx-header{
+  font-family:'Cinzel',serif;font-weight:700;
+  font-size:clamp(9px,2vw,11px);letter-spacing:.5em;
+  color:rgba(0,220,200,.7);text-transform:uppercase;
+  margin-bottom:26px;border-bottom:1px solid rgba(0,200,180,.2);
+  padding-bottom:11px;width:100%;
+}
+.cx-stitle{
+  font-size:clamp(11px,2.8vw,14px);letter-spacing:.45em;
+  color:rgba(0,220,200,1);margin-bottom:7px;text-transform:uppercase;
+}
+.cx-ssub{
+  font-size:clamp(9px,2vw,11px);letter-spacing:.28em;
+  color:rgba(0,200,180,.65);margin-bottom:28px;font-style:italic;
+}
+.cx-stext{
+  font-family:'Cinzel',serif;font-size:clamp(14px,3.5vw,18px);
+  line-height:2;color:rgba(248,244,235,1);
+  margin-bottom:36px;font-style:italic;max-width:480px;
+}
+.cx-hint{
+  font-size:clamp(10px,2.2vw,13px);letter-spacing:.4em;
+  color:rgba(0,220,200,.85);animation:cxblink 2s ease infinite;
+}
+@keyframes cxblink{0%,100%{opacity:1}50%{opacity:.3}}
+.cx-scroll{max-height:62vh;overflow-y:auto;width:100%;-webkit-overflow-scrolling:touch}
+.cx-ptitle{
+  font-family:'Cinzel',serif;font-size:clamp(13px,3vw,17px);
+  letter-spacing:.3em;color:rgba(0,220,200,.9);
+  margin-bottom:18px;padding-bottom:11px;
+  border-bottom:1px solid rgba(0,180,160,.2);width:100%;
+}
+.cx-ptext{
+  font-family:'Cinzel',serif;font-size:clamp(11px,2.2vw,13px);
+  line-height:2;color:rgba(220,215,205,.78);
+  margin-bottom:14px;font-style:italic;text-align:left;width:100%;
+}
+.cx-item{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  border:1px solid rgba(0,180,160,.25);padding:17px 22px;cursor:pointer;
+  background:rgba(0,30,28,.6);transition:all .2s;margin-bottom:9px;
+  pointer-events:all;touch-action:auto;
+}
+.cx-item:hover,.cx-item:active{background:rgba(0,80,70,.6);border-color:rgba(0,220,200,.6)}
+.cx-ilabel{
+  font-family:'Cinzel',serif;font-size:clamp(13px,3.2vw,17px);
+  letter-spacing:.25em;color:rgba(0,220,200,.9);
+}
+.cx-iarr{color:rgba(0,200,180,.45);font-size:13px}
+.cx-entry{
+  border:1px solid rgba(0,140,120,.2);padding:13px 17px;
+  margin-bottom:9px;background:rgba(0,20,18,.5);width:100%;text-align:left;
+}
+.cx-ename{
+  font-family:'Cinzel',serif;font-size:clamp(12px,2.4vw,14px);
+  letter-spacing:.24em;margin-bottom:7px;
+}
+.cx-ebody{
+  font-size:clamp(9px,1.7vw,11px);color:rgba(200,195,185,.7);
+  line-height:1.9;letter-spacing:.06em;
+}
+.cx-back{
+  margin-top:18px;font-family:'Cinzel',serif;
+  font-size:clamp(10px,2.4vw,13px);letter-spacing:.35em;
+  color:rgba(0,180,160,.8);background:transparent;
+  border:1px solid rgba(0,160,140,.35);padding:12px 30px;
+  cursor:pointer;pointer-events:all;touch-action:auto;
+  transition:all .2s;
+}
+.cx-back:active{background:rgba(0,80,70,.4)}
+.cx-dl{
+  display:inline-flex;align-items:center;gap:12px;
+  font-family:'Cinzel',serif;font-size:clamp(12px,2.8vw,15px);
+  letter-spacing:.2em;text-transform:uppercase;
+  padding:15px 40px;background:rgba(0,216,176,.08);
+  border:1px solid var(--teal);color:var(--teal);
+  text-decoration:none;transition:all .35s;
+  cursor:pointer;margin-bottom:12px;
+}
+.cx-dl:hover{background:rgba(0,216,176,.2);box-shadow:0 0 36px rgba(0,216,176,.3)}
+.cx-dnote{
+  font-size:clamp(9px,1.8vw,11px);letter-spacing:.18em;
+  color:rgba(100,100,110,.55);margin-top:8px;
+}
+
+/* ── Sound button ── */
+#snd{
+  position:fixed;bottom:26px;right:26px;z-index:100;
+  width:40px;height:40px;border:1px solid rgba(200,160,232,.22);
+  background:rgba(5,5,12,.85);color:rgba(200,160,232,.45);
+  font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .3s;opacity:0;animation:sfadein 1s 3s ease forwards;
+  font-family:'Share Tech Mono',monospace;
+}
+#snd:hover{border-color:rgba(200,160,232,.65);color:rgba(200,160,232,.95)}
+#snd.on{color:rgba(200,160,232,.9);border-color:rgba(200,160,232,.5)}
+@keyframes sfadein{to{opacity:1}}
+
+/* ── Scroll pips ── */
+#pip{
+  position:fixed;right:16px;top:50%;transform:translateY(-50%);
+  z-index:30;display:flex;flex-direction:column;gap:10px;pointer-events:none;
+}
+.pd{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.1);transition:all .4s}
+.pd.on{background:rgba(255,255,255,.65);box-shadow:0 0 8px rgba(255,255,255,.3)}
+
+/* ── Scanlines ── */
+#scan{
+  position:fixed;inset:0;z-index:9;pointer-events:none;
+  background:repeating-linear-gradient(
+    to bottom,transparent 0,transparent 2px,rgba(0,0,0,.04) 2px,rgba(0,0,0,.04) 4px);
+  opacity:0;transition:opacity .7s;
+}
+@media(max-width:600px){.rpanel{padding:28px 18px}.cx-inner{width:96vw}}
+</style>
+</head>
+<body>
+<!-- No-JS fallback: visible only when JavaScript is disabled -->
+<noscript>
+  <style>#scroll-space,#c,#tbanner,.rov,#codex,#snd,#pip,#scan,#shint{display:none}</style>
+  <div style="font-family:Georgia,serif;max-width:680px;margin:60px auto;padding:24px;color:#ddd;background:#03030a;line-height:1.8">
+    <h1 style="font-size:2.5rem;margin-bottom:12px">ANSELM</h1>
+    <p style="color:#aaa;margin-bottom:20px;font-style:italic">A free single-file HTML5 browser strategy game</p>
+    <p>Play as the Traveller guiding five dying civilisations through a spreading Goo corruption. Forge weapons, grow cities from primitive huts to Heaven, and destroy the Nexus Eye in each realm.</p>
+    <p style="margin-top:16px"><strong>JavaScript is required to play ANSELM.</strong> Please enable JavaScript in your browser.</p>
+    <p style="margin-top:20px"><a href="Anselm-v3_7_0-1.html" download style="color:#c8a0e8">Download ANSELM v3.7.0 (free, single HTML file)</a></p>
+  </div>
+</noscript>
+
+<main>
+<div id="scroll-space"></div>
+<canvas id="c"
+  role="img"
+  aria-label="ANSELM — three-dimensional view of five dying realms floating in space, each with its own civilisation and spreading Goo corruption"></canvas>
+
+<!-- Persistent title banner -->
+<div id="tbanner" aria-hidden="true">
+  <p class="tb-eye" id="tb-eye">A tale of the last age</p>
+  <h1 class="tb-title" id="tb-title">ANSELM</h1>
+  <p class="tb-sub" id="tb-sub">Five realms. One Traveller. An ancient darkness spreading outward.</p>
+</div>
+
+<!-- Hero hint -->
+<div class="ov" id="hero" aria-hidden="true">
+  <p class="hero-hint">The universe is dying. Five dimensions fracture at their seams.<br>You are the only force that can cross between them.</p>
+  <p style="margin-top:32px;font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:.38em;color:rgba(200,195,200,.32);animation:hpulse 2.4s ease-in-out infinite">SCROLL TO TRAVEL</p>
+</div>
+
+<!-- Realm Overlays -->
+<div class="rov" id="r0" aria-hidden="true" style="--rc:var(--dim1)">
+  <div class="rpanel">
+    <p class="rnum">Realm 01 of 05</p>
+    <h2 class="rname">Ashveil</h2>
+    <p class="rbody">The Ashfawn drift through rose-tinted meadows, unaware of what approaches. Ashveil is where the Traveller first steps. The Goo wakes here. The first Nexus Eye forms here. Collect Silverstone, mine the Pink Crystal, and carry its power to the Forge at the realm's heart.</p>
+    <span class="rchip">◈ Pink MSM crystal</span>
+    <span class="rchip">doubles silverstone yield</span>
+  </div>
+</div>
+<div class="rov" id="r1" aria-hidden="true" style="--rc:var(--dim2)">
+  <div class="rpanel">
+    <p class="rnum">Realm 02 of 05</p>
+    <h2 class="rname">Thalassorn</h2>
+    <p class="rbody">Water dominates Thalassorn. Flooding reshapes the map and the Driftray glide between stepping stones across the deep. The Crystal Behemoth rose from the deepest water when the Nexus Eye formed here. Blue Crystal accelerates native mating. Life finds a way even beneath the tide.</p>
+    <span class="rchip">◈ Blue MSM crystal</span>
+    <span class="rchip">speeds mating</span>
+  </div>
+</div>
+<div class="rov" id="r2" aria-hidden="true" style="--rc:var(--dim3)">
+  <div class="rpanel">
+    <p class="rnum">Realm 03 of 05</p>
+    <h2 class="rname">Verdekai</h2>
+    <p class="rbody">Forest floor and ancient root. The Mosscrawler winds through the canopy. Natives chop trees for shelter and the Green Crystal makes them grow back faster. The Storm Wyrm, a serpent of living storm and root, coils around the Nexus Eye here, patient and poisonous.</p>
+    <span class="rchip">◈ Green MSM crystal</span>
+    <span class="rchip">accelerates tree regrowth</span>
+  </div>
+</div>
+<div class="rov" id="r3" aria-hidden="true" style="--rc:var(--dim4)">
+  <div class="rpanel">
+    <p class="rnum">Realm 04 of 05</p>
+    <h2 class="rname">Solenthar</h2>
+    <p class="rbody">A desert that breathes. Sandstorms reduce visibility to nothing and you navigate by memory. The Dustleaper vanishes and reappears. The Bone Colossus assembles from the remains of all who fell to the Goo. It grows with every realm it claims. Kill it before it finishes growing.</p>
+    <span class="rchip">◈ Beige MSM crystal</span>
+    <span class="rchip">forge the Duskbrand</span>
+  </div>
+</div>
+<div class="rov" id="r4" aria-hidden="true" style="--rc:var(--dim5)">
+  <div class="rpanel">
+    <p class="rnum">Realm 05 of 05</p>
+    <h2 class="rname">Umbrakor</h2>
+    <p class="rbody">Gravity is a suggestion here. The Voidmoth drifts on invisible currents and you feel the pull in slow rotating arcs. The Shadow Titan is a creature of pure collapsed darkness. It cannot be seen until it chooses to be. The Purple Crystal reveals what the darkness hides. The Nexus Eye itself.</p>
+    <span class="rchip">◈ Purple MSM crystal</span>
+    <span class="rchip">reveals the Nexus Eye</span>
+  </div>
+</div>
+
+<!-- Daedalus Codex Panel -->
+<div id="codex">
+  <div id="codex-inner">
+    <div class="cx-header">Daedalus Codex</div>
+    <div id="cx-content"></div>
+  </div>
+</div>
+
+<!-- Scanlines -->
+<div id="scan" aria-hidden="true"></div>
+
+<!-- Sound -->
+<button id="snd" title="Toggle music" aria-label="Toggle ANSELM theme music" role="button">♪</button>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HIDDEN SEO CONTENT — Visually invisible, fully crawlable.
+     Contains all game features, lore, and download info that lives
+     only inside the JS-rendered Daedalus Codex. Search engines
+     read this; users experience the visual Codex instead.
+═══════════════════════════════════════════════════════════════ -->
+<section class="vh" aria-label="Full game information for search engines">
+
+  <h2>ANSELM — Free Browser Strategy Game, No Download Required</h2>
+  <p>ANSELM is a free, self-contained HTML5 browser game that requires no download, no server, no framework, and no installation. Open the single HTML file in any modern browser and play immediately. Built entirely with vanilla JavaScript, HTML Canvas, and the Web Audio API. Over 15,900 lines of code in one file. Version 3.7.0 — the Daedalus Codex Update.</p>
+
+  <h3>The Story</h3>
+  <p>You are the Traveller. You exist between dimensions. Five parallel realms are dying, consumed by a sentient black corruption called the Goo that spreads outward from a hidden Nexus Eye in each world. You are the only being capable of crossing between dimensions via the Gateway. Your mission is to nurture each realm's indigenous civilisation, forge realm-specific weapons from MSM Crystals, and destroy the Nexus Eye in all five realms before the darkness consumes everything.</p>
+  <p>ANSELM is melancholic, mythic, and quietly hopeful. Its world is grounded in a sense of cosmic weight drawn from the in-game text Lux in Tenebris — Light in Darkness — an ancient book the natives study as they advance through the ages.</p>
+
+  <h3>Gameplay Features</h3>
+
+  <h4>The Chamber Room and Daedalus Codex</h4>
+  <p>New in version 3.7.0, the game opens in the Chamber — a small stone room lit by wall torches. A tall machine called the Daedalus stands at the far end. Power it with a Pink Crystal to unlock a six-screen briefing covering the Goo, the natives, the weapons system, and your mission. The exit to Ashveil only opens once the briefing is complete. Inside the Chamber, a fully procedural recreation of the Fairy Fountain theme plays — D major, 6/8 time, 52 BPM, five simultaneous voice layers, room echo on every note. No audio file exists anywhere in the package.</p>
+  <p>The Daedalus Codex is an in-game encyclopedia accessible from the Chambers tile during gameplay and from the title screen between sessions. Seven chapters cover Natives, Dimensions, The Forge, Mining, Genetics, Civilisation, and Lux in Tenebris. The title-screen Codex shows which scripture chapters have been studied across all previous sessions, and displays the last six named artifacts forged in the world.</p>
+
+  <h4>Genetics Engine</h4>
+  <p>Every native carries ten genetic traits: agility, work ethic, social skill, faith, resilience, curiosity, hair colour, skin colour, home dimension, and gender. When two compatible natives mate near a shrine, offspring inherit traits 50/50 from each parent with a 15 percent chance of random mutation. Cross-dimensional couples produce hybrid children tinted with both realm colours. Corrupted natives pass Goo-spread traits to offspring, creating a biological threat that compounds over generations.</p>
+
+  <h4>Civilisation Ages</h4>
+  <p>Each realm progresses independently through five base ages: Primitive, Settlement, Town, City, and Heaven. Beyond Heaven, the Extended Age system draws from Lux in Tenebris: the Possession Age, the Shared Age, the Bandwidth Age, the Feed Field Age, the Hyper-Holo-Grid Age, and the On and On. At Age 8, realms establish Dimensional Contact. When all five connect, the Grid Awakening triggers. At Age 9, all active wars in a realm automatically end — the text names this moment the hyper-holo-grid achieving peace.</p>
+
+  <h4>World Events</h4>
+  <p>Every 2.5 to 5 minutes, a random world event may fire in any dimension. Meteor strikes form rock craters with Silverstone at the centre and scatter nearby natives. Dimensional storms accelerate civilisation XP for 10 seconds, with the Purple Realm gaining the largest bonus. The Great Migration sends wanderer-personality natives across dimensions, carrying their genetics with them. Eclipses throw all animals into flight mode and darken the realm briefly. These events are logged in the Chronicle panel when they occur in the player's current dimension.</p>
+
+  <h4>Edict System</h4>
+  <p>Once 20 loyalty points are accumulated in a dimension, the player may issue a royal Edict lasting five minutes. The Build Decree forces construction every five seconds. The Study Decree doubles scripture interpretation speed. Militarize lowers the army loyalty threshold from 3 to 2, recruiting more defenders immediately. The Expansion Edict triples migration speed across all dimensions. Only one Edict can be active per dimension at a time, and any Edict can be cancelled early.</p>
+
+  <h4>Town Founding</h4>
+  <p>The player can found new settlements anywhere in the active dimension by pressing F while standing on open ground. Nearby loyal natives must collectively carry at least 30 wood and 20 stone. When requirements are met, the resources are consumed, a Great Hall is placed, four huts are raised in cardinal directions, and four pairs of native settlers spawn. The new town is assigned a specialty — Farming, Mining, Trade, or Craft — and its founding is recorded in the Chronicle.</p>
+
+  <h4>Diplomacy</h4>
+  <p>Once two dimensions reach Age 8 and establish Dimensional Contact, their relationship begins to evolve. Realms with high affinity accumulate toward an alliance, which triggers migration bonuses between them. Low-affinity realms drift toward rivalry, and at high rivalry strength, raid parties of enemy-team natives begin appearing in the player's dimension. The Diplomacy panel, opened with D, allows the player to spend Refined Silverstone to broker peace or accelerate alliance bonuses. Two hate-pairs are hard-coded — Blue and Green, Green and Purple — and tend toward early conflict.</p>
+
+  <h4>Realm Tension and War</h4>
+  <p>Each dimension tracks a Tension meter from 0 to 100, rising when trees are depleted, resources run low, disputes are active, or Goo coverage grows. When Tension exceeds 70, the realm escalates through five war levels: Peace, Skirmish, Conflict, War, and Total War. At War level 3 and above, raid parties spawn periodically. At Total War, those parties may carry bombs. The Chronicle records every escalation. Reaching the Hyper-Holo-Grid Age automatically ends all wars in that realm, representing the civilisation transcending conflict entirely.</p>
+
+  <h4>Meta-Progression</h4>
+  <p>Between sessions, four pieces of data persist in the browser's local storage. The three highest-generation natives from any run carry their full trait sets into the next game, seeding the starting population with bloodlines that have already been shaped by generations of play. Dimensions that reached Heaven grant bonus starting XP and spawn Returner natives in the next run. Lux in Tenebris chapter progress persists, so the title-screen Codex fills in over multiple playthroughs. When a weapon is forged with third-generation or higher natives present, a native's name is attached to the weapon — Greyonnen's Tidecaller, Vaelthar's Ashen Blade — and those named artifacts accumulate in the Codex across all future sessions.</p>
+
+  <h4>Native Quests</h4>
+  <p>Every 80 seconds, a named neutral native in any dimension may offer a quest. Stone delivery quests ask for five Silverstone in exchange for town happiness and loyalty. Escort quests ask the player to stay close for 30 seconds, after which the native permanently joins at loyalty 3. Travel quests ask the player to leave the dimension and return, after which the native becomes a permanent trader and the dimension gains 20 XP. Only one quest per dimension can be active at a time.</p>
+
+  <h4>The Goo</h4>
+  <p>The Goo is not a character. It is a force. It pulses from its Nexus Eye every 20 to 50 seconds, spreading 8 to 15 tiles at a time. It converts ground tiles to corruption, kills animals on contact, and turns neutral natives into hostile chasers if they stand on corrupted ground too long. The HUD shows Goo coverage as a percentage with a heartbeat sound that accelerates as coverage rises. At high coverage the screen border pulses red. Fight back with MSM Crystals forged into weapons, Time Crystals planted to grow MSM crops, or the Ultimate Weapon to walk directly onto the Nexus Eye and destroy it.</p>
+
+  <h4>The Forge and Weapons</h4>
+  <p>The Forge sits at the exact centre of every map inside a Sacred Zone that nothing can overwrite. Five realm weapons are forged from MSM Crystals: the Ashen Blade from Ashveil, the Tidecaller from Thalassorn, the Verdant Spear from Verdekai, the Duskbrand from Solenthar, and the Voidreaver from Umbrakor. Combine all five weapons into the Ultimate Weapon. Time Crystals can now be planted on clear ground tiles and bloom into a 3x3 MSM crop after 60 seconds. When third-generation natives witness a forging, the weapon is named after their bloodline and recorded in the Codex.</p>
+
+  <h4>Procedural Everything</h4>
+  <p>All maps are generated from seeded noise with distinct terrain thresholds per realm. All music is generated live via the Web Audio API — no audio files exist in the package. All pixel art is drawn with fillRect calls. The Chamber ambient track is a full OoT-accurate Fairy Fountain reconstruction in D major. The main title theme is a 43-bar composed piece in A minor at 56 BPM using six distinct voice timbres with echo delays.</p>
+
+  <h4>Natives and Loyalty</h4>
+  <p>Each dimension begins with an indigenous population colour-coded to their realm. Natives have a rich AI state machine: idle, gather, carry resources, build huts, plant trees, trade between towns, hunt animals, sail between piers, sleep at campfires at night, escort the player, and in version 3.7.0, pursue quests. Walk near natives to raise their loyalty from neutral through ally to devoted. Devoted natives display gold crown dots, defend the Forge, and pass their best genetic traits to offspring.</p>
+
+  <h3>The Five Realms</h3>
+
+  <h4>Realm 1 — Ashveil, the Pink Realm</h4>
+  <p>Tutorial realm with no environmental hazard. Home of the Ashfawn, a deer-like creature. Boss: the Void Leviathan. Forge weapon: the Ashen Blade. Pink MSM Crystal doubles Silverstone yield. Rose-tinted meadows, gentle terrain, the first place the Goo awakens. The Chamber of First Light is set here — the Daedalus machine awaits before you ever set foot on its soil.</p>
+
+  <h4>Realm 2 — Thalassorn, the Blue Realm</h4>
+  <p>Flooding and stepping stones create a hazardous water environment. Home of the Driftray, a manta ray-like creature. Boss: the Crystal Behemoth, an armoured giant of ice that rose when the Nexus Eye formed. Forge weapon: the Tidecaller. Blue Crystal accelerates native mating. Hard-coded rival of Verdekai — tension builds here early.</p>
+
+  <h4>Realm 3 — Verdekai, the Green Realm</h4>
+  <p>Dense ancient forest with no additional hazard. Home of the Mosscrawler, an armadillo-like creature. Boss: the Storm Wyrm, a serpent of living storm and root, patient and poisonous. Forge weapon: the Verdant Spear. Green Crystal accelerates tree regrowth. Rivals both Thalassorn and Umbrakor by hard-coded affinity — the dimension most likely to be at war.</p>
+
+  <h4>Realm 4 — Solenthar, the Beige Realm</h4>
+  <p>Desert environment with sandstorm visibility hazard that reduces vision to nothing. Navigate by memory. Home of the Dustleaper, a rabbit-like creature. Boss: the Bone Colossus, assembled from the remains of all who fell to the Goo. Forge weapon: the Duskbrand.</p>
+
+  <h4>Realm 5 — Umbrakor, the Purple Realm</h4>
+  <p>Gravity drift hazard slowly pulls the player in a rotating direction. Home of the Voidmoth, a moth-like creature. Boss: the Shadow Titan, a creature of pure collapsed darkness that cannot be seen until it chooses to be. Forge weapon: the Voidreaver. Purple Crystal reveals the hidden Nexus Eye location. Dimensional storms here grant 75 percent more XP than in other realms.</p>
+
+  <h3>Lux in Tenebris</h3>
+  <p>Lux in Tenebris, meaning Light in Darkness, is an ancient in-game text that seeds all post-Heaven civilisational development. Its ten chapters correspond to ten principles: Mind, Body, Soul, Self, Order, Life, Time, Eternity, Death, and Repeat. Each chapter flavours a new civilisational era. Scholars in each realm study successive chapters as they advance through the ages, interpreting ancient wisdom to build new wonders. Chapter progress now persists across sessions in the Daedalus Codex, accumulating over multiple playthroughs.</p>
+
+  <h3>Technical Details</h3>
+  <p>ANSELM runs in a single self-contained HTML file using vanilla JavaScript, HTML Canvas 2D, and the Web Audio API. No frameworks, no dependencies, no server. Uses seeded Lehmer-xorshift RNG for map generation, viewport culling for performance, interpolated player movement at 60fps, native caps to prevent performance cliffs, and a full 80x60 tile map per dimension. Version 3.7.0 adds a second chamber canvas for the pre-game tutorial room, plus state tracking for war levels, diplomacy relations, raid parties, world events, Edict timers, and quest states — all included in the save system. Total codebase: over 15,900 lines in one file. Works completely offline after download.</p>
+
+  <h3>Download ANSELM Free</h3>
+  <p>Download ANSELM v3.7.0 as a single HTML file for free. No account required. No installation. Works in Chrome, Firefox, Safari, and Edge on desktop and mobile. Open the file locally or host it anywhere — it is entirely self-contained.</p>
+
+</section>
+
+</main>
+
+<!-- Scroll pips (outside main, purely decorative UI) -->
+<div id="pip" aria-hidden="true">
+  <div class="pd" data-i="0"></div>
+  <div class="pd" data-i="1"></div>
+  <div class="pd" data-i="2"></div>
+  <div class="pd" data-i="3"></div>
+  <div class="pd" data-i="4"></div>
+  <div class="pd" data-i="5"></div>
+  <div class="pd" data-i="6"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+'use strict';
+/* ═══════════════════════════════════════════════════════════
+   THREE.JS SCENE
+═══════════════════════════════════════════════════════════ */
+const C3 = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({canvas:C3,antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setClearColor(0x02020a,1);
+renderer.shadowMap.enabled=false;
+
+const scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x02020a,.00038);
+
+const camera=new THREE.PerspectiveCamera(62,window.innerWidth/window.innerHeight,.5,5000);
+camera.position.set(0,115,700);
+
+window.addEventListener('resize',()=>{
+  camera.aspect=window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth,window.innerHeight);
+});
+
+/* ── Lights ── */
+const ambLight=new THREE.AmbientLight(0x1a1a28,.7);
+scene.add(ambLight);
+const dirLight=new THREE.DirectionalLight(0xfff8f0,1.2);
+dirLight.position.set(1,3,.8);
+scene.add(dirLight);
+
+/* ── Seeded RNG & noise ── */
+function makeRNG(seed){
+  let s=seed>>>0;
+  return ()=>{s^=s<<13;s^=s>>17;s^=s<<5;return(s>>>0)/0xffffffff};
+}
+
+function buildNoiseTable(seed){
+  const rng=makeRNG(seed),t=new Float32Array(65536);
+  for(let i=0;i<65536;i++) t[i]=rng();
+  return t;
+}
+
+function valueNoise2d(x,y,tbl){
+  const ix=Math.floor(x)&0xffff, iy=Math.floor(y)&0xffff;
+  const fx=x-Math.floor(x), fy=y-Math.floor(y);
+  const ux=fx*fx*(3-2*fx), uy=fy*fy*(3-2*fy);
+  function h(xi,yi){ return tbl[((xi*3741+(yi*8677))^(xi*6871))&0xffff]; }
+  return (1-ux)*(1-uy)*h(ix,iy)+ux*(1-uy)*h(ix+1,iy)+(1-ux)*uy*h(ix,iy+1)+ux*uy*h(ix+1,iy+1);
+}
+
+function octNoise(x,y,tbl,octs,persist,lacu){
+  let v=0,a=1,f=1,m=0;
+  for(let o=0;o<octs;o++){v+=valueNoise2d(x*f,y*f,tbl)*a;m+=a;a*=persist;f*=lacu;}
+  return v/m;
+}
+
+/* ══════════════════════════════════════════════════════════
+   REALM DEFINITIONS (colors exact from game DIMS array)
+══════════════════════════════════════════════════════════ */
+const REALM_DEFS=[
+  { // 0 Ashveil — warm rose, gentle rolling
+    name:'Ashveil', seed:0x1a3c5e,
+    hex:0xc9919a, glowHex:[201,145,154],
+    base:[195,148,155], accent:[235,200,208], msm:[240,168,178],
+    tree:[110,148,105], water:[110,148,195], rock:[135,132,130],
+    goo_dark:[22,6,28], goo_mid:[58,10,72], goo_vein:[90,18,110],
+    wThresh:.32, tThresh:.52, rThresh:.78, // water/tree/rock thresholds
+    noiseOcts:4, noisePersist:.55, noiseLacu:1.9
+  },
+  { // 1 Thalassorn — steel blue, lots of water
+    name:'Thalassorn', seed:0x4d7a2f,
+    hex:0x8aabbe, glowHex:[138,171,190],
+    base:[130,165,188], accent:[190,218,238], msm:[148,196,228],
+    tree:[75,138,108], water:[88,138,188], rock:[125,128,132],
+    goo_dark:[10,8,28], goo_mid:[30,15,68], goo_vein:[60,22,105],
+    wThresh:.45, tThresh:.60, rThresh:.82,
+    noiseOcts:3, noisePersist:.6, noiseLacu:2.1
+  },
+  { // 2 Verdekai — rich green, dense forest
+    name:'Verdekai', seed:0x8fc013,
+    hex:0x8ab89a, glowHex:[138,184,154],
+    base:[130,178,148], accent:[182,215,190], msm:[128,205,152],
+    tree:[62,138,80], water:[92,158,195], rock:[128,130,125],
+    goo_dark:[8,16,12], goo_mid:[28,52,32], goo_vein:[55,85,60],
+    wThresh:.22, tThresh:.68, rThresh:.88,
+    noiseOcts:5, noisePersist:.5, noiseLacu:2.2
+  },
+  { // 3 Solenthar — warm sand, sparse desert
+    name:'Solenthar', seed:0xab3def,
+    hex:0xc4b89a, glowHex:[196,184,154],
+    base:[190,178,148], accent:[225,215,190], msm:[205,178,122],
+    tree:[118,148,92], water:[108,155,188], rock:[148,145,138],
+    goo_dark:[30,18,8], goo_mid:[70,42,12], goo_vein:[105,68,18],
+    wThresh:.12, tThresh:.28, rThresh:.60,
+    noiseOcts:3, noisePersist:.48, noiseLacu:2.0
+  },
+  { // 4 Umbrakor — deep indigo, dark and mysterious
+    name:'Umbrakor', seed:0x13579b,
+    hex:0xa891c4, glowHex:[168,145,196],
+    base:[162,138,192], accent:[205,185,232], msm:[188,148,232],
+    tree:[88,128,98], water:[100,128,198], rock:[130,128,138],
+    goo_dark:[18,4,30], goo_mid:[52,8,80], goo_vein:[88,14,128],
+    wThresh:.28, tThresh:.50, rThresh:.73,
+    noiseOcts:4, noisePersist:.62, noiseLacu:1.8
+  },
+];
+
+/* ══════════════════════════════════════════════════════════
+   HYPERREALISTIC TILE TEXTURE GENERATOR (8px per tile)
+══════════════════════════════════════════════════════════ */
+const TW=80, TH=60, TS=8; // 8px per tile -> 640x480 texture
+
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v))}
+function lerp3(a,b,t){return[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t]}
+function toCSS(c,a){return a!==undefined?`rgba(${c[0]|0},${c[1]|0},${c[2]|0},${a})`:`rgb(${c[0]|0},${c[1]|0},${c[2]|0})`}
+
+function genRealmTexture(def){
+  const W=TW*TS, H=TH*TS;
+  const cv=document.createElement('canvas');
+  cv.width=W; cv.height=H;
+  const ctx=cv.getContext('2d');
+  const rng=makeRNG(def.seed^0xc0de);
+  const tbl=buildNoiseTable(def.seed);
+
+  // Generate smooth heightmap
+  const hmap=new Float32Array(TW*TH);
+  for(let row=0;row<TH;row++){
+    for(let col=0;col<TW;col++){
+      const nx=col/TW, ny=row/TH;
+      hmap[row*TW+col]=octNoise(nx*5,ny*5,tbl,def.noiseOcts,def.noisePersist,def.noiseLacu);
+    }
+  }
+  // Normalise to 0-1
+  let hmin=1,hmax=0;
+  for(let i=0;i<hmap.length;i++){if(hmap[i]<hmin)hmin=hmap[i];if(hmap[i]>hmax)hmax=hmap[i];}
+  for(let i=0;i<hmap.length;i++) hmap[i]=(hmap[i]-hmin)/(hmax-hmin);
+
+  // Classify terrain
+  const terrain=new Uint8Array(TW*TH); // 0=water 1=ground 2=tree 3=rock
+  for(let i=0;i<hmap.length;i++){
+    const h=hmap[i];
+    if(h<def.wThresh) terrain[i]=0;
+    else if(h<def.tThresh) terrain[i]=1;
+    else if(h<def.rThresh) terrain[i]=2;
+    else terrain[i]=3;
+  }
+
+  // Force border ring = ground
+  for(let c=0;c<TW;c++){terrain[c]=1;terrain[(TH-1)*TW+c]=1;}
+  for(let r=0;r<TH;r++){terrain[r*TW]=1;terrain[r*TW+TW-1]=1;}
+
+  // Sacred zone centre (forge/gateway) = ground
+  const fx=Math.floor(TW/2), fy=Math.floor(TH/2);
+  for(let dy=-3;dy<=3;dy++) for(let dx=-4;dx<=4;dx++) terrain[(fy+dy)*TW+(fx+dx)]=1;
+
+  // Goo cluster
+  const gX=Math.floor(TW*.65), gY=Math.floor(TH*.47);
+  const gooSet=new Set();
+  for(let dy=-7;dy<=7;dy++) for(let dx=-10;dx<=10;dx++)
+    if(dx*dx/100+dy*dy/49<1) gooSet.add((gY+dy)*TW+(gX+dx));
+
+  // MSM crystal deposits (scattered)
+  const crystalSet=new Set();
+  const rng2=makeRNG(def.seed^0x1234);
+  for(let m=0;m<18;m++){
+    for(let a=0;a<60;a++){
+      const cx=4+Math.floor(rng2()*(TW-8)), cy=4+Math.floor(rng2()*(TH-8));
+      const idx=cy*TW+cx;
+      if(terrain[idx]===1&&!gooSet.has(idx)&&!crystalSet.has(idx)){crystalSet.add(idx);break;}
+    }
+  }
+
+  // Silverstone clusters
+  const silverSet=new Set();
+  for(let s=0;s<30;s++){
+    const sx=4+Math.floor(rng2()*(TW-8)), sy=4+Math.floor(rng2()*(TH-8));
+    for(let d=0;d<4;d++){
+      const nx=sx+(d%2), ny=sy+Math.floor(d/2);
+      const idx=ny*TW+nx;
+      if(idx>=0&&idx<TW*TH&&terrain[idx]===1) silverSet.add(idx);
+    }
+  }
+
+  // Draw each tile
+  for(let row=0;row<TH;row++){
+    for(let col=0;col<TW;col++){
+      const idx=row*TW+col;
+      const px=col*TS, py=row*TS;
+      const tv=hmap[idx]; // terrain value for shade variation
+      const shade=(tv-.5)*.18; // ±9% shade
+
+      if(gooSet.has(idx)){
+        drawGooTile(ctx,px,py,def,rng2,idx);
+      } else if(crystalSet.has(idx)){
+        drawCrystalTile(ctx,px,py,def.msm,shade);
+      } else if(silverSet.has(idx)){
+        drawSilverTile(ctx,px,py,shade);
+      } else {
+        const t=terrain[idx];
+        if(t===0) drawWaterTile(ctx,px,py,def.water,shade);
+        else if(t===2) drawTreeTile(ctx,px,py,def.tree,def.base,shade);
+        else if(t===3) drawRockTile(ctx,px,py,def.rock,shade);
+        else drawGroundTile(ctx,px,py,def.base,shade,col,row);
+      }
+    }
+  }
+
+  // Draw Nexus Eye
+  // Nexus position gets plain dark goo (the animated 3D plane handles the eye)
+  // Leave a dark circular base to hint at what sits there
+  const ex=gX*TS+TS/2, ey=gY*TS+TS/2;
+  ctx.fillStyle='rgba(20,0,32,0.9)';
+  ctx.beginPath();ctx.arc(ex,ey,14,0,Math.PI*2);ctx.fill();
+
+  // Forge (gold square, centre)
+  ctx.fillStyle='#8090a8';ctx.fillRect(fx*TS-5,fy*TS-5,10,10);
+  ctx.fillStyle='#d8a820';ctx.fillRect(fx*TS-3,fy*TS-3,6,6);
+  ctx.fillStyle='#ffe060';ctx.fillRect(fx*TS-1,fy*TS-1,3,3);
+  // Gateway (teal square, 2 tiles right)
+  ctx.fillStyle='#4060a0';ctx.fillRect((fx+2)*TS-4,(fy)*TS-4,8,8);
+  ctx.fillStyle='#6080d8';ctx.fillRect((fx+2)*TS-2,(fy)*TS-2,4,4);
+
+  const tex=new THREE.CanvasTexture(cv);
+  tex.magFilter=THREE.NearestFilter;
+  tex.minFilter=THREE.LinearMipMapLinearFilter;
+  tex.generateMipmaps=true;
+  return tex;
+}
+
+function drawGroundTile(ctx,x,y,base,sh,col,row){
+  // Two-tone checkerboard + slight grain
+  const c0=[base[0]+sh*200,base[1]+sh*200,base[2]+sh*200];
+  const c1=[base[0]+sh*200-8,base[1]+sh*200-8,base[2]+sh*200-8];
+  const isAlt=(col+row)%2===0;
+  ctx.fillStyle=toCSS(clampArr(isAlt?c0:c1));
+  ctx.fillRect(x,y,TS,TS);
+  // subtle diagonal lines for texture
+  ctx.fillStyle='rgba(0,0,0,.05)';
+  for(let i=0;i<TS;i+=3) ctx.fillRect(x+i,y+i,1,1);
+  // dark 1px right+bottom edge
+  ctx.fillStyle='rgba(0,0,0,.15)';
+  ctx.fillRect(x+TS-1,y,1,TS); ctx.fillRect(x,y+TS-1,TS,1);
+}
+
+function drawWaterTile(ctx,x,y,water,sh){
+  const c=[water[0]+sh*180,water[1]+sh*180,water[2]+sh*180];
+  ctx.fillStyle=toCSS(clampArr(c));ctx.fillRect(x,y,TS,TS);
+  // ripple lines
+  const rc=[water[0]+30,water[1]+30,water[2]+30];
+  ctx.fillStyle=toCSS(clampArr(rc),.5);
+  for(let i=1;i<TS-1;i+=2) ctx.fillRect(x,y+i,TS,1);
+  // dark edge
+  ctx.fillStyle='rgba(0,0,0,.22)';
+  ctx.fillRect(x+TS-1,y,1,TS);ctx.fillRect(x,y+TS-1,TS,1);
+}
+
+function drawTreeTile(ctx,x,y,tree,base,sh){
+  // Ground base
+  const gc=[base[0]+sh*160-10,base[1]+sh*160-10,base[2]+sh*160-10];
+  ctx.fillStyle=toCSS(clampArr(gc));ctx.fillRect(x,y,TS,TS);
+  // Tree canopy body
+  const tc=[tree[0]+sh*160,tree[1]+sh*160,tree[2]+sh*160];
+  ctx.fillStyle=toCSS(clampArr(tc));ctx.fillRect(x+1,y+1,TS-2,TS-2);
+  // lighter top-left face (sun)
+  const tl=[tree[0]+40,tree[1]+40,tree[2]+20];
+  ctx.fillStyle=toCSS(clampArr(tl),.7);ctx.fillRect(x+1,y+1,TS/2,TS/2);
+  // darker bottom-right shadow
+  ctx.fillStyle='rgba(0,0,0,.25)';ctx.fillRect(x+TS/2,y+TS/2,TS/2-1,TS/2-1);
+  // dark edge
+  ctx.fillStyle='rgba(0,0,0,.2)';
+  ctx.fillRect(x+TS-1,y,1,TS);ctx.fillRect(x,y+TS-1,TS,1);
+}
+
+function drawRockTile(ctx,x,y,rock,sh){
+  const c=[rock[0]+sh*180,rock[1]+sh*180,rock[2]+sh*180];
+  ctx.fillStyle=toCSS(clampArr(c));ctx.fillRect(x,y,TS,TS);
+  // angular highlight (top-left face bright)
+  const hl=[rock[0]+35,rock[1]+35,rock[2]+35];
+  ctx.fillStyle=toCSS(clampArr(hl));ctx.fillRect(x,y,TS-2,TS-2);
+  // shadow face (bottom-right)
+  const shd=[rock[0]-30,rock[1]-30,rock[2]-30];
+  ctx.fillStyle=toCSS(clampArr(shd));ctx.fillRect(x+3,y+3,TS-3,TS-3);
+  // inner mid face
+  ctx.fillStyle=toCSS(clampArr(c));ctx.fillRect(x+2,y+2,TS-4,TS-4);
+  ctx.fillStyle='rgba(0,0,0,.2)';
+  ctx.fillRect(x+TS-1,y,1,TS);ctx.fillRect(x,y+TS-1,TS,1);
+}
+
+function drawCrystalTile(ctx,x,y,msm,sh){
+  // Dark background
+  ctx.fillStyle='rgba(4,2,8,1)';ctx.fillRect(x,y,TS,TS);
+  // Crystal facets
+  const c=[msm[0]+sh*200,msm[1]+sh*200,msm[2]+sh*200];
+  const cl=[Math.min(255,msm[0]+80),Math.min(255,msm[1]+80),Math.min(255,msm[2]+80)];
+  const cd=[msm[0]-30,msm[1]-30,msm[2]-30];
+  // Left face
+  ctx.fillStyle=toCSS(clampArr(cd));ctx.fillRect(x,y+2,3,TS-4);
+  // Main face
+  ctx.fillStyle=toCSS(clampArr(c));ctx.fillRect(x+2,y+1,TS-4,TS-2);
+  // Right face
+  ctx.fillStyle=toCSS(clampArr(cd));ctx.fillRect(x+TS-3,y+2,3,TS-4);
+  // Bright specular highlight
+  ctx.fillStyle=toCSS(clampArr(cl),.9);ctx.fillRect(x+2,y+1,2,3);
+  // Inner glow
+  ctx.fillStyle=toCSS(clampArr(cl),.35);ctx.fillRect(x+3,y+3,TS-6,TS-6);
+  // Edge
+  ctx.fillStyle='rgba(0,0,0,.35)';
+  ctx.fillRect(x+TS-1,y,1,TS);ctx.fillRect(x,y+TS-1,TS,1);
+}
+
+function drawSilverTile(ctx,x,y,sh){
+  const silver=[180+sh*100,185+sh*100,195+sh*100];
+  ctx.fillStyle=toCSS(clampArr(silver));ctx.fillRect(x,y,TS,TS);
+  // Metallic sheen
+  ctx.fillStyle='rgba(255,255,255,.5)';ctx.fillRect(x,y,TS/2,2);
+  ctx.fillStyle='rgba(255,255,255,.3)';ctx.fillRect(x+1,y+2,3,3);
+  ctx.fillStyle='rgba(0,0,0,.15)';ctx.fillRect(x+TS/2,y+TS/2,TS/2,TS/2);
+  ctx.fillStyle='rgba(0,0,0,.15)';
+  ctx.fillRect(x+TS-1,y,1,TS);ctx.fillRect(x,y+TS-1,TS,1);
+}
+
+function drawGooTile(ctx,x,y,def,rng,idx){
+  const p=((idx*7919)%256)/256;
+  const r=def.goo_dark[0]+p*(def.goo_mid[0]-def.goo_dark[0]);
+  const g=def.goo_dark[1]+p*(def.goo_mid[1]-def.goo_dark[1]);
+  const b=def.goo_dark[2]+p*(def.goo_mid[2]-def.goo_dark[2]);
+  ctx.fillStyle=`rgb(${r|0},${g|0},${b|0})`;ctx.fillRect(x,y,TS,TS);
+  // Vein pattern
+  if(p>.5){
+    ctx.fillStyle=toCSS(def.goo_vein,.45);
+    ctx.fillRect(x+(p*TS|0)%4,y,1,TS);
+    ctx.fillRect(x,y+(p*TS|0)%4,TS,1);
+  }
+  // Void holes
+  ctx.fillStyle='rgba(0,0,0,.5)';
+  const hx=((idx*3)*TS/8|0)%TS, hy=((idx*5)*TS/8|0)%TS;
+  ctx.fillRect(x+hx,y+hy,2,2);
+  ctx.fillStyle='rgba(0,0,0,.22)';
+  ctx.fillRect(x+TS-1,y,1,TS);ctx.fillRect(x,y+TS-1,TS,1);
+}
+
+function clampArr(c){ return[clamp(c[0],0,255),clamp(c[1],0,255),clamp(c[2],0,255)]; }
+
+/* ════════════════════════════════════════════════════════════
+   BUILD 3D REALM GROUPS
+════════════════════════════════════════════════════════════ */
+const REALM_Z=[0,-560,-1120,-1680,-2240];
+const PW=230, PH=172;
+const realmGrps=[], floatObjs=[], gooGlows=[];
+const realmPointLights=[];
+const nexusObjs=[]; // {ctx2d, tex, mesh}
+
+/* ════════════════════════════════════════════════════════════
+   ANIMATED NEXUS EYE — faithful port of game's drawNexus()
+   Canvas: 64x128px, NTile=16 (TILE equivalent)
+════════════════════════════════════════════════════════════ */
+const NC_W=96, NC_H=256, NC_T=32;
+
+function drawNexusEye(nc, t){
+  const c=nc.ctx2d;
+  const T=NC_T, W=NC_W, H=NC_H;
+  c.clearRect(0,0,W,H);
+
+  const bx=W/2-T/2;   // base tile left pixel
+  const by=H-T-18;    // base tile top (leaves room below for lava glow)
+  const cx2=W/2;      // center x
+  const eyeTop=by-T*4;
+  const eyeBot=by+T;
+  const eyeH=eyeBot-eyeTop;
+  const eyeMidY=eyeTop+eyeH*0.42;
+
+  // L1 — outer corona
+  c.fillStyle=`rgba(70,0,110,${0.07+0.05*Math.sin(t*.03)})`;
+  c.fillRect(cx2-T,eyeTop-8,T*3,eyeH+16);
+
+  // L2 — purple flame wings (bell-curve)
+  for(let row=0;row<eyeH;row+=2){
+    const prog=row/eyeH, bell=Math.sin(prog*Math.PI);
+    const flick=Math.sin(t*.06+row*.04+.3)*3;
+    const wW=Math.floor(bell*T*1.5+flick);
+    const alpha=(0.30+0.18*bell)*(0.7+0.3*Math.sin(t*.05+row*.02));
+    c.fillStyle=`rgba(130,0,200,${alpha})`;
+    if(wW>0){c.fillRect(cx2-T/2-wW,eyeTop+row,wW,2);c.fillRect(cx2+T/2,eyeTop+row,wW,2);}
+    const rimW=Math.floor(bell*6);
+    const rimA=(0.45+0.2*bell)*(0.6+0.4*Math.sin(t*.08+row*.03));
+    c.fillStyle=`rgba(180,30,255,${rimA})`;
+    if(rimW>0){c.fillRect(cx2-T/2-rimW-2,eyeTop+row,rimW,2);c.fillRect(cx2+T/2+2,eyeTop+row,rimW,2);}
+  }
+
+  // L3 — orange-yellow mid flame column
+  for(let row=0;row<eyeH;row+=2){
+    const prog=row/eyeH, bell=Math.sin(prog*Math.PI);
+    const colW=Math.floor(4+bell*12+Math.sin(t*.11+row*.06)*2);
+    c.fillStyle=`rgba(255,120,0,${0.55+0.35*bell})`;
+    c.fillRect(cx2-colW,eyeTop+row,colW*2,2);
+  }
+
+  // L4 — bright yellow inner column
+  for(let row=0;row<eyeH;row+=2){
+    const prog=row/eyeH, bell=Math.sin(prog*Math.PI);
+    const colW=Math.floor(2+bell*5+Math.sin(t*.17+row*.09));
+    c.fillStyle=`rgba(255,210,40,${0.70+0.30*bell})`;
+    c.fillRect(cx2-colW,eyeTop+row,colW*2,2);
+  }
+
+  // L5 — white-hot core beam
+  const wb=0.80+0.20*Math.sin(t*.14);
+  c.fillStyle=`rgba(255,255,255,${wb})`;    c.fillRect(cx2-2,eyeTop,4,eyeH);
+  c.fillStyle=`rgba(255,255,240,${wb*.7})`; c.fillRect(cx2-1,eyeTop,2,eyeH);
+  // tip flare
+  const wt=0.9+0.1*Math.sin(t*.22);
+  c.fillStyle=`rgba(255,255,255,${wt})`;
+  c.fillRect(cx2-4,eyeTop,8,5); c.fillRect(cx2-2,eyeTop-3,4,3); c.fillRect(cx2-1,eyeTop-6,2,3);
+
+  // L6 — animated flame licks
+  const lick=(off,side,row,w,h,r,g,b)=>{
+    const fy=Math.floor(Math.sin(t*.10+off)*4);
+    const fa=0.35+0.30*Math.sin(t*.08+off*1.4);
+    const lx=side<0?cx2-T/2+side*w+Math.floor(Math.sin(t*.07+off)*2):cx2+T/2+Math.floor(Math.sin(t*.07+off)*2);
+    c.fillStyle=`rgba(${r},${g},${b},${fa})`;
+    c.fillRect(lx,eyeTop+row+fy,w,h);
+  };
+  lick(0.0,-1,14,6,4,255,100,0); lick(0.9,1,22,5,5,255,140,20);
+  lick(1.8,-1,30,5,3,200,60,0);  lick(2.7,1,10,4,5,255,80,0);
+  lick(3.6,-1,42,7,3,255,180,40);lick(4.5,1,36,5,4,240,90,10);
+  lick(0.4,-1,52,6,3,255,220,60);lick(1.3,1,60,4,4,200,70,0);
+  lick(2.2,-1,68,5,3,255,140,30);lick(3.1,1,50,6,4,255,100,0);
+
+  // L7 — yellow vein streaks along shaft
+  const vs=0.5+0.3*Math.sin(t*.07+1.8);
+  c.fillStyle=`rgba(255,200,0,${vs})`;
+  c.fillRect(cx2-6,eyeTop+8,1,Math.floor(eyeH*.5));
+  c.fillRect(cx2+5,eyeTop+5,1,Math.floor(eyeH*.4));
+  c.fillRect(cx2-4,eyeTop+22,1,Math.floor(eyeH*.35));
+  c.fillRect(cx2+3,eyeTop+16,1,Math.floor(eyeH*.3));
+
+  // L8 — lightning arcs
+  const lf=Math.floor(t*.18);
+  const ldefs=[
+    [-1,.18,[[0,4],[4,-2],[8,3],[12,-1],[16,2]]],
+    [ 1,.26,[[0,3],[4,2],[8,-2],[12,2],[16,-2]]],
+    [-1,.40,[[0,2],[5,-2],[9,2],[14,-1],[18,1]]],
+    [ 1,.52,[[0,4],[4,-2],[8,2],[12,-2],[17,3]]],
+    [-1,.62,[[0,2],[5,3],[10,-2],[14,2],[19,-1]]],
+    [ 1,.74,[[0,3],[4,-2],[9,2],[13,3],[18,-2]]],
+  ];
+  const ld=ldefs[lf%ldefs.length];
+  const la=0.55+0.35*Math.sin(t*.22);
+  const lRow=eyeTop+Math.floor(eyeH*ld[1]);
+  let lxp=ld[0]<0?cx2-T/2:cx2+T/2;
+  c.fillStyle=`rgba(230,200,255,${la})`;
+  ld[2].forEach(([dx,dy])=>{
+    const nx=lxp+ld[0]*dx;
+    c.fillRect(Math.min(lxp,nx),lRow+dy,Math.abs(dx)+2,2);
+    lxp=nx;
+  });
+  // white lightning core
+  let lxp2=ld[0]<0?cx2-T/2:cx2+T/2;
+  c.fillStyle=`rgba(255,255,255,${la*.7})`;
+  ld[2].slice(0,3).forEach(([dx,dy])=>{
+    const nx=lxp2+ld[0]*dx;
+    c.fillRect(Math.min(lxp2,nx)+1,lRow+dy,Math.max(1,Math.abs(dx)-1),1);
+    lxp2=nx;
+  });
+  // second arc
+  const ld2=ldefs[(lf+3)%ldefs.length];
+  const la2=0.35+0.25*Math.sin(t*.19+1.5);
+  const lRow2=eyeTop+Math.floor(eyeH*ld2[1]);
+  let lxp3=ld2[0]<0?cx2-T/2:cx2+T/2;
+  c.fillStyle=`rgba(210,160,255,${la2})`;
+  ld2[2].forEach(([dx,dy])=>{
+    const nx=lxp3+ld2[0]*dx;
+    c.fillRect(Math.min(lxp3,nx),lRow2+dy,Math.abs(dx)+2,2);
+    lxp3=nx;
+  });
+
+  // L9 — THE EYE (almond iris, vertical diamond slit pupil)
+  const eH=28, eW=T+8, eY=eyeMidY-eH/2;
+  // outer glow
+  for(let row=0;row<eH;row++){
+    const bell=Math.sin((row/eH)*Math.PI);
+    const glowW=Math.floor(bell*(eW+10));
+    c.fillStyle=`rgba(255,140,0,${(0.35+0.20*bell)*(0.8+0.2*Math.sin(t*.09))})`;
+    c.fillRect(cx2-glowW/2,eY+row,glowW,1);
+  }
+  // iris (orange-gold almond)
+  for(let row=0;row<eH;row++){
+    const bell=Math.sin((row/eH)*Math.PI);
+    const iW=Math.floor(bell*eW);
+    c.fillStyle=`rgba(255,170,10,${0.80+0.20*Math.sin(t*.10+row*.05)})`;
+    c.fillRect(cx2-iW/2,eY+row,iW,1);
+  }
+  // inner iris brighter yellow
+  const iiH=Math.floor(eH*.78), iiOff=Math.floor((eH-iiH)/2);
+  for(let row=0;row<iiH;row++){
+    const bell=Math.sin((row/iiH)*Math.PI);
+    const rW=Math.floor(bell*(eW-6));
+    c.fillStyle=`rgba(255,220,60,${0.90+0.10*Math.sin(t*.12+row*.06)})`;
+    c.fillRect(cx2-rW/2,eY+iiOff+row,rW,1);
+  }
+  // vertical diamond slit pupil
+  const pupH=eH-3, pupMaxW=7+Math.floor(Math.sin(t*.05));
+  for(let row=0;row<pupH;row++){
+    const diamond=1-Math.abs((row/pupH)*2-1);
+    const pW=Math.max(1,Math.floor(diamond*pupMaxW));
+    c.fillStyle='rgba(0,0,0,0.98)';
+    c.fillRect(cx2-Math.ceil(pW/2),eY+2+row,pW,1);
+  }
+  // inner fire slit (red-orange down center of pupil)
+  const sha=0.55+0.35*Math.sin(t*.11);
+  c.fillStyle=`rgba(200,40,0,${sha})`;  c.fillRect(cx2-1,eY+2,2,pupH-1);
+  c.fillStyle=`rgba(255,80,0,${sha*.6})`;c.fillRect(cx2,eY+3,1,pupH-3);
+  // white glints at almond corners
+  const ga=0.70+0.30*Math.sin(t*.13);
+  c.fillStyle=`rgba(255,255,255,${ga})`;
+  c.fillRect(cx2-Math.floor(eW/2)+1,eY+Math.floor(eH*.42),2,2);
+  c.fillRect(cx2+Math.floor(eW/2)-3,eY+Math.floor(eH*.42),2,2);
+
+  // L10 — floating purple sparks / wisps
+  for(let i=0;i<8;i++){
+    const wa=0.25+0.20*Math.sin(t*.06+i*1.13);
+    const wx=cx2+Math.floor(Math.sin(t*.04+i*1.1)*20)-2;
+    const wy=eyeTop+Math.floor((i/8)*eyeH)+Math.floor(Math.sin(t*.07+i*.8)*6);
+    c.fillStyle=`rgba(180,50,255,${wa})`;c.fillRect(wx,wy,3,3);
+    c.fillStyle=`rgba(255,220,80,${wa*.55})`;c.fillRect(wx+1,wy+1,1,1);
+  }
+
+  // L11 — base tile / lava pool beneath
+  c.fillStyle='#03010a'; c.fillRect(bx,by,T,T+18);
+  const gg1=0.55+0.30*Math.sin(t*.07);
+  const gg2=0.45+0.28*Math.sin(t*.05+1.2);
+  c.fillStyle=`rgba(80,0,130,${gg1})`;  c.fillRect(bx-4,by+4,T+8,T-6);
+  c.fillStyle=`rgba(180,60,0,${gg2})`;  c.fillRect(bx,by+Math.floor(T*.5),T,Math.floor(T*.5));
+  c.fillStyle=`rgba(255,140,0,${0.35+0.25*Math.sin(t*.10)})`;
+  c.fillRect(bx+6,by+Math.floor(T*.69),T-12,Math.floor(T*.31)+8);
+  // lava bubbles
+  const b1=Math.floor((t*.04)%T), b2=Math.floor((t*.03+3)%T);
+  c.fillStyle=`rgba(255,180,20,${0.55+0.35*Math.sin(t*.12)})`;
+  c.fillRect(bx+6+b1%10,by+T-b1%8,2,2);
+  c.fillRect(bx+T-8+b2%8,by+T-b2%6,2,2);
+  c.fillRect(bx+T/2,by+T-5,2,2);
+
+  nc.tex.needsUpdate=true;
+}
+
+REALM_DEFS.forEach((def,i)=>{
+  const grp=new THREE.Group();
+  const rng=makeRNG(def.seed^0xabcd);
+
+  /* Tile plane */
+  const tex=genRealmTexture(def);
+  const planeMat=new THREE.MeshLambertMaterial({map:tex,side:THREE.DoubleSide});
+  const plane=new THREE.Mesh(new THREE.PlaneGeometry(PW,PH),planeMat);
+  plane.rotation.x=-Math.PI/2;
+  plane.rotation.z=(rng()-.5)*.055;
+  plane.position.y=-20;
+  grp.add(plane);
+
+  /* Atmosphere ring */
+  const [gr,gg,gb]=def.glowHex;
+  const ringC=new THREE.Color(gr/255,gg/255,gb/255);
+  const ring=new THREE.Mesh(
+    new THREE.RingGeometry(PW*.53,PW*.57,80),
+    new THREE.MeshBasicMaterial({color:ringC,side:THREE.DoubleSide,transparent:true,opacity:.5,blending:THREE.AdditiveBlending,depthWrite:false})
+  );
+  ring.rotation.x=-Math.PI/2;ring.position.y=-19;ring.userData.isRing=true;grp.add(ring);
+
+  const halo=new THREE.Mesh(
+    new THREE.RingGeometry(PW*.56,PW*.85,80),
+    new THREE.MeshBasicMaterial({color:ringC,side:THREE.DoubleSide,transparent:true,opacity:.06,blending:THREE.AdditiveBlending,depthWrite:false})
+  );
+  halo.rotation.x=-Math.PI/2;halo.position.y=-19;halo.userData.isHalo=true;grp.add(halo);
+
+  /* Trees with cylinder trunk + sphere canopy */
+  const trunkMat=new THREE.MeshLambertMaterial({
+    color:new THREE.Color(def.tree[0]*.4/255,def.tree[1]*.4/255,def.tree[2]*.4/255)
+  });
+  const foliageMat=new THREE.MeshLambertMaterial({
+    color:new THREE.Color(def.tree[0]/255,def.tree[1]/255,def.tree[2]/255)
+  });
+  for(let t=0;t<32;t++){
+    const tx=(rng()-.5)*PW*.88, tz=(rng()-.5)*PH*.88;
+    const th=rng()*5+3, tr=rng()*.6+.3;
+    // Trunk
+    const trunk=new THREE.Mesh(new THREE.CylinderGeometry(tr*.4,tr*.6,th,5),trunkMat);
+    trunk.position.set(tx,-20+th/2,tz);grp.add(trunk);
+    // Foliage sphere
+    const rad=rng()*2.5+2;
+    const foliage=new THREE.Mesh(new THREE.SphereGeometry(rad,7,6),foliageMat);
+    foliage.position.set(tx,-20+th+rad*.7,tz);grp.add(foliage);
+  }
+
+  /* Crystal spires (ConeGeometry, glowing additive) */
+  const crystMat=new THREE.MeshBasicMaterial({
+    color:new THREE.Color(def.msm[0]/255,def.msm[1]/255,def.msm[2]/255),
+    transparent:true,opacity:.85,blending:THREE.AdditiveBlending,depthWrite:false
+  });
+  for(let c=0;c<12;c++){
+    const cx=(rng()-.5)*PW*.75, cz=(rng()-.5)*PH*.75;
+    const ch=rng()*4+2, cr=rng()*1+.5;
+    const crystal=new THREE.Mesh(new THREE.ConeGeometry(cr,ch,5),crystMat);
+    crystal.position.set(cx,-20+ch/2,cz);
+    crystal.userData={bY:crystal.position.y,ph:rng()*Math.PI*2,sp:rng()*.6+.6,isFloat:true};
+    grp.add(crystal);
+    floatObjs.push(crystal);
+  }
+
+  /* Animated Nexus Eye — canvas texture updated every frame */
+  const gNX=(0.65-.5)*PW, gNZ=(0.47-.5)*PH;
+  const nexCanvas=document.createElement('canvas');
+  nexCanvas.width=NC_W; nexCanvas.height=NC_H;
+  const nexCtx=nexCanvas.getContext('2d');
+  const nexTex=new THREE.CanvasTexture(nexCanvas);
+  // Sprite billboards toward camera so flame is always visible from any angle.
+  // NC_T=32 means lava-below-tile = 18px → UV from bottom v = 18/256 = 0.070
+  // center.set(0.5, 0.070) anchors tile-bottom at position = ground (y=-20)
+  const nexMat=new THREE.SpriteMaterial({
+    map:nexTex, transparent:true, depthWrite:false
+  });
+  const nexMesh=new THREE.Sprite(nexMat);
+  nexMesh.center.set(0.5, 18/NC_H); // tile-bottom at ground
+  nexMesh.scale.set(11, 44, 1);     // ~4 realm-tiles wide, 15 tiles tall
+  nexMesh.position.set(gNX,-20,gNZ);
+  grp.add(nexMesh);
+  nexusObjs.push({ctx2d:nexCtx, tex:nexTex, mesh:nexMesh});
+
+  /* Goo ambient glow sphere (keeps the purple haze) */
+  const gs=new THREE.Mesh(
+    new THREE.SphereGeometry(9,16,16),
+    new THREE.MeshBasicMaterial({
+      color:0x7010b0,transparent:true,opacity:.18,
+      blending:THREE.AdditiveBlending,depthWrite:false
+    })
+  );
+  gs.position.set(gNX,-6,gNZ);
+  grp.add(gs);gooGlows.push(gs);
+
+  /* Point light at nexus */
+  const pL=new THREE.PointLight(new THREE.Color(gr/255,gg/255,gb/255),.8,200);
+  pL.position.set(gNX,10,gNZ);
+  grp.add(pL);realmPointLights.push(pL);
+
+  grp.position.z=REALM_Z[i];
+  realmGrps.push(grp);
+  scene.add(grp);
+});
+
+/* ── Stars ── */
+(()=>{
+  const rng=makeRNG(0xdeadcafe);
+  const N=5500;
+  const pos=new Float32Array(N*3), col=new Float32Array(N*3), sz=new Float32Array(N);
+  const RCOLS=REALM_DEFS.map(d=>[d.glowHex[0]/255,d.glowHex[1]/255,d.glowHex[2]/255]);
+  for(let i=0;i<N;i++){
+    pos[i*3]=(rng()-.5)*3200;
+    pos[i*3+1]=(rng()-.5)*1800;
+    pos[i*3+2]=(rng()-.5)*5500-1400;
+    const isC=rng()<.12, rc=isC?RCOLS[Math.floor(rng()*5)]:[1,1,1];
+    col[i*3]=rc[0];col[i*3+1]=rc[1];col[i*3+2]=rc[2];
+    sz[i]=rng()*2+.3;
+  }
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  g.setAttribute('color',new THREE.BufferAttribute(col,3));
+  g.setAttribute('size',new THREE.BufferAttribute(sz,1));
+  const pts=new THREE.Points(g,new THREE.PointsMaterial({size:1.8,vertexColors:true,transparent:true,opacity:.85,sizeAttenuation:true}));
+  scene.add(pts);
+  window._stars=pts;
+})();
+
+/* ── Daedalus terminal mesh ── */
+const daeGrp=new THREE.Group();
+const daeZ=-2900;
+daeGrp.add(new THREE.Mesh(new THREE.BoxGeometry(240,180,14),new THREE.MeshLambertMaterial({color:0x060612})));
+const scrnM=new THREE.MeshBasicMaterial({color:0x00d0a0,transparent:true,opacity:.05,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide});
+const scrnMesh=new THREE.Mesh(new THREE.PlaneGeometry(218,162),scrnM);
+scrnMesh.position.z=8;daeGrp.add(scrnMesh);
+const frameLines=new THREE.LineSegments(
+  new THREE.EdgesGeometry(new THREE.BoxGeometry(228,170,2)),
+  new THREE.LineBasicMaterial({color:0x00c890,transparent:true,opacity:.75})
+);
+frameLines.position.z=7;daeGrp.add(frameLines);
+[[-110,80],[110,80],[-110,-80],[110,-80]].forEach(([lx,ly])=>{
+  const dot=new THREE.Mesh(new THREE.SphereGeometry(.9,6,6),new THREE.MeshBasicMaterial({color:0x00ffaa}));
+  dot.position.set(lx,ly,8);daeGrp.add(dot);
+});
+daeGrp.position.set(0,20,daeZ);
+scene.add(daeGrp);
+
+/* ════════════════════════════════════════════════════════════
+   SCROLL + OVERLAY SYSTEM
+════════════════════════════════════════════════════════════ */
+const TOTAL=8600;
+let progress=0;
+
+const REALM_COLORS_CSS=['#c9919a','#8aabbe','#8ab89a','#c4b89a','#a891c4'];
+const REALM_EYES=['tb-eye'];
+const TBANNER_SUBS=['A tale of the last age','The pink realm lies ahead.','Dark tides in the blue realm.','Ancient forest of the green realm.','Sandstorm country ahead.','The void realm. Final.','System ready.'];
+
+function camZ(p){return 680-p*3600}
+function camY(p){return 115-p*85}
+
+function ovAlpha(p,en,pk,ex){
+  if(p<en)return 0;
+  if(p<=pk)return(p-en)/(pk-en);
+  if(p<=ex)return 1-(p-pk)/(ex-pk);
+  return 0;
+}
+
+const OV_WINS={
+  hero:   [0,   .005, .14],  // fully gone by .14
+  r0:     [.17, .23,  .32],  // strict gap after hero
+  r1:     [.33, .39,  .48],
+  r2:     [.49, .55,  .64],
+  r3:     [.65, .71,  .80],
+  r4:     [.81, .86,  .92],
+};
+const BANNER_HIDE_AT=.88;
+let codexShown=false;
+
+function getCurrentRealm(p){
+  const windows=[[.17,.32],[.33,.48],[.49,.64],[.65,.80],[.81,.92]];
+  for(let i=0;i<5;i++){
+    const[a,b]=windows[i];
+    if(p>=a&&p<=b) return i;
+  }
+  return p<.17?-1:5;
+}
+
+function updateOverlays(p){
+  // Realm overlays
+  for(const[id,[en,pk,ex]] of Object.entries(OV_WINS)){
+    const el=document.getElementById(id);
+    if(el) el.style.opacity=ovAlpha(p,en,pk,ex);
+  }
+
+  // Title banner
+  const tb=document.getElementById('tbanner');
+  if(tb){
+    const fade=p>BANNER_HIDE_AT?Math.max(0,1-(p-BANNER_HIDE_AT)/.06):1;
+    tb.style.opacity=fade;
+    // Change title glow color per realm
+    const ri=getCurrentRealm(p);
+    const tTitle=document.getElementById('tb-title');
+    if(tTitle&&ri>=0&&ri<5){
+      tTitle.style.filter=`drop-shadow(0 0 40px ${REALM_COLORS_CSS[ri]}88)`;
+    }
+    const eyeEl=document.getElementById('tb-eye');
+    if(eyeEl){
+      const subs=['A tale of the last age','Realm 01 · Ashveil','Realm 02 · Thalassorn','Realm 03 · Verdekai','Realm 04 · Solenthar','Realm 05 · Umbrakor',''];
+      const si=ri===-1?0:ri<5?ri+1:6;
+      eyeEl.textContent=subs[si];
+    }
+    const sub=document.getElementById('tb-sub');
+    if(sub) sub.style.opacity=p<.12?1:p<.17?1-(p-.12)/.05:0;
+  }
+
+  // Scroll hint fade
+  const sh=document.getElementById('shint');
+  if(sh) sh.style.opacity=p<.04?1:Math.max(0,1-(p-.04)/.05);
+
+  // Scanlines at Daedalus
+  document.getElementById('scan').style.opacity=ovAlpha(p,.87,.92,2)*.65;
+
+  // Pips
+  const breaks=[0,.09,.25,.42,.59,.76,.88,1];
+  let sec=0;
+  for(let i=0;i<breaks.length-1;i++) if(p>=breaks[i]) sec=i;
+  document.querySelectorAll('.pd').forEach((d,i)=>d.classList.toggle('on',i===sec));
+
+  // Trigger codex at Daedalus progress
+  if(p>=.89&&!codexShown){
+    codexShown=true;
+    showCodex();
+  }
+  // Hide codex when user scrolls back up so they can scroll freely
+  if(p<.86&&codexShown){
+    codexShown=false;
+    closeCodexPanel();
+  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   3D ANIMATION TICK
+════════════════════════════════════════════════════════════ */
+function tick3d(){
+  const t=performance.now()*.001;
+  const cz=camZ(progress),cy=camY(progress);
+  const sway=Math.sin(progress*Math.PI*2.2)*12;
+  camera.position.set(sway,cy,cz);
+
+  // Hero phase: look UP into pure starfield so realms are out of frame
+  // Transition: smoothly rotate camera down to flythrough angle
+  if(progress < .14){
+    camera.lookAt(sway*.05, cy+260, cz-80);
+  } else if(progress < .23){
+    const bt=(progress-.14)/.09;
+    camera.lookAt(
+      sway*.05+(sway*.2-sway*.05)*bt,
+      (cy+260)+((-38)-(260))*bt,
+      (cz-80)+((cz-300)-(cz-80))*bt
+    );
+  } else {
+    camera.lookAt(sway*.2,cy-38,cz-300);
+  }
+
+  // Ring/halo pulse per realm
+  realmGrps.forEach((g,i)=>{
+    const pulse=.5+.5*Math.sin(t*.7+i*1.5);
+    g.children.forEach(c=>{
+      if(c.userData.isRing) c.material.opacity=.32+pulse*.22;
+      if(c.userData.isHalo) c.material.opacity=.04+pulse*.07;
+    });
+  });
+
+  // Float crystals
+  floatObjs.forEach(c=>{
+    const d=c.userData;
+    if(d.isFloat){
+      c.position.y=d.bY+Math.sin(t*d.sp+d.ph)*2.2;
+      c.rotation.y=t*d.sp*.5;
+    }
+  });
+
+  // Goo glow pulse
+  gooGlows.forEach((g,i)=>{
+    const p2=.5+.5*Math.sin(t*2+i*.9);
+    g.material.opacity=.12+p2*.2;
+    g.scale.setScalar(1+p2*.22);
+  });
+
+  // Point lights flicker
+  realmPointLights.forEach((l,i)=>{
+    l.intensity=.5+.3*Math.sin(t*1.8+i*1.1);
+  });
+
+  // Daedalus screen shimmer
+  scrnM.opacity=.03+(.5+.5*Math.sin(t*1.2))*.05;
+
+  // Animated Nexus Eyes — update canvas each frame
+  nexusObjs.forEach(nc=>drawNexusEye(nc,t));
+
+  // Fog: thick during hero text (pure starfield), clears as realms approach
+  const fogTarget = progress < .14 ? 0.0022
+                  : progress < .22 ? 0.0022 - (progress-.14)/.08*(0.0022-0.00038)
+                  : 0.00038;
+  scene.fog.density += (fogTarget - scene.fog.density) * .08;
+
+  // Stars slow drift
+  if(window._stars) window._stars.rotation.y=t*.0018;
+
+  updateOverlays(progress);
+}
+
+window.addEventListener('scroll',()=>{
+  progress=Math.min(1,window.scrollY/TOTAL);
+},{passive:true});
+
+(function loop(){
+  requestAnimationFrame(loop);
+  tick3d();
+  renderer.render(scene,camera);
+})();
+
+/* ════════════════════════════════════════════════════════════
+   DAEDALUS CODEX (faithful to in-game implementation)
+════════════════════════════════════════════════════════════ */
+const PREAMBLE=[
+  {title:'TRAVELLER DETECTED',sub:'INITIALIZING BRIEFING PROTOCOL',
+   text:'You are the Traveller. You exist between dimensions. You do not belong to any one world, and that is precisely why you were chosen.'},
+  {title:'THE GOO',sub:'NEXUS CORRUPTION REPORT',
+   text:'Across five dimensions, a corruption spreads. It seeps from a wound in the fabric of each realm. A dark oily Goo pours from the Nexus Eye. Left unchecked, it consumes everything.\n\nStone. Life. Memory.'},
+  {title:'THE NATIVES',sub:'INDIGENOUS CIVILIZATION STATUS',
+   text:'Each realm holds a civilization. Primitive, struggling, unaware of what hunts them. They are not helpless, but they cannot fight what they cannot see coming.\n\nYour presence accelerates them. With your guidance, they will grow.'},
+  {title:'THE THREAT',sub:'HAZARD ASSESSMENT',
+   text:'Monsters roam where the Goo has spread. Crystal Guards protect the resources you need most. Do not face them empty-handed.\n\nThe Forge is your tool. Silverstone is your material. Learn it.'},
+  {title:'THE MISSION',sub:'PRIMARY DIRECTIVE',
+   text:'Destroy the Nexus Eye in each dimension. Five realms. Five wounds to close.\n\nYou will need to travel between them. The Gateways will take you when you are ready.'},
+  {title:'YOUR JOURNEY BEGINS',sub:'END OF BRIEFING',
+   text:'The door is open, Traveller. Download the game below, or read further in the Codex. The Chamber awaits.'},
+];
+
+const DLORE=[
+  {r:'Ashveil',   col:'var(--dim1)',animal:'Ashfawn (deer)',   haz:'None — tutorial realm',  boss:'Void Leviathan', wpn:'Ashen Blade',   desc:'A vast writhing horror from the void beneath. Do not approach without the Ashen Blade.'},
+  {r:'Thalassorn',col:'var(--dim2)',animal:'Driftray (manta)', haz:'Flooding, stepping stones',boss:'Crystal Behemoth',wpn:'Tidecaller', desc:'An armored giant of ice and shard that rose from the deepest water when the Nexus Eye formed.'},
+  {r:'Verdekai',  col:'var(--dim3)',animal:'Mosscrawler (armadillo)',haz:'None',             boss:'Storm Wyrm',     wpn:'Verdant Spear', desc:'A serpent of living storm and root. Ancient, patient, and poisonous to the very air around it.'},
+  {r:'Solenthar', col:'var(--dim4)',animal:'Dustleaper (rabbit)',haz:'Sandstorm visibility', boss:'Bone Colossus',  wpn:'Duskbrand',     desc:'Assembled from the remains of all who fell to the Goo. It grows with every realm it claims.'},
+  {r:'Umbrakor',  col:'var(--dim5)',animal:'Voidmoth (moth)',   haz:'Gravity drift',         boss:'Shadow Titan',   wpn:'Voidreaver',    desc:'A creature of pure collapsed darkness. It bends gravity and cannot be seen until it chooses to be.'},
+];
+
+const FDATA=[
+  {n:'Ashen Blade',   r:'Ashveil',    col:'var(--dim1)',cost:'Pink MSM Crystal from Ashveil'},
+  {n:'Tidecaller',    r:'Thalassorn', col:'var(--dim2)',cost:'Blue MSM Crystal from Thalassorn'},
+  {n:'Verdant Spear', r:'Verdekai',   col:'var(--dim3)',cost:'Green MSM Crystal from Verdekai'},
+  {n:'Duskbrand',     r:'Solenthar',  col:'var(--dim4)',cost:'Beige MSM Crystal from Solenthar'},
+  {n:'Voidreaver',    r:'Umbrakor',   col:'var(--dim5)',cost:'Purple MSM Crystal from Umbrakor'},
+  {n:'Ultimate Weapon',r:'All Realms',col:'#e8c060',   cost:'Combine all five realm weapons at the Forge. Destroys all five individually; opens all Gateways freely; supercharges combat aura.'},
+];
+
+let codexMode='closed', preamIdx=0;
+
+function showCodex(){
+  codexMode='preamble';preamIdx=0;
+  const el=document.getElementById('codex');
+  el.classList.add('vis');
+  setTimeout(()=>el.classList.add('opaque'),20);
+  renderCodex();
+}
+function closeCodexPanel(){
+  const el=document.getElementById('codex');
+  el.classList.remove('opaque');
+  setTimeout(()=>el.classList.remove('vis'),500);
+  codexMode='closed';
+}
+
+// Forward wheel events that happen over the codex back to the page
+// so the user can always scroll up/down through realms
+document.getElementById('codex').addEventListener('wheel',e=>{
+  const sc=document.querySelector('#cx-content .cx-scroll');
+  if(sc){
+    const atBot=sc.scrollTop+sc.clientHeight>=sc.scrollHeight-2;
+    const atTop=sc.scrollTop<=0;
+    if((e.deltaY>0&&atBot)||(e.deltaY<0&&atTop)){
+      window.scrollBy({top:e.deltaY,behavior:'auto'});
+    }
+  } else {
+    window.scrollBy({top:e.deltaY,behavior:'auto'});
+  }
+},{passive:true});
+
+function renderCodex(){
+  const el=document.getElementById('cx-content');
+  if(!el)return;
+
+  if(codexMode==='preamble'){
+    const s=PREAMBLE[preamIdx];
+    const isLast=preamIdx===PREAMBLE.length-1;
+    el.innerHTML=`
+      <div class="cx-stitle">${s.title}</div>
+      <div class="cx-ssub">${s.sub}</div>
+      <div class="cx-stext">${s.text.replace(/\n\n/g,'<br><br>')}</div>
+      <div class="cx-hint">${isLast?'TAP ANYWHERE TO CONTINUE':'TAP ANYWHERE TO CONTINUE'}</div>`;
+    el.onclick=el.ontouchend=e=>{e&&e.preventDefault&&e.preventDefault();advancePream();};
+    return;
+  }
+
+  let luxChapter=0;
+
+  if(codexMode==='menu'){
+    el.innerHTML=`
+      <div class="cx-ptitle">SELECT A CHAPTER</div>
+      <div class="cx-scroll">
+        <div class="cx-item" id="cm-nat"><span class="cx-ilabel">NATIVES</span><span class="cx-iarr">›</span></div>
+        <div class="cx-item" id="cm-dim"><span class="cx-ilabel">DIMENSIONS</span><span class="cx-iarr">›</span></div>
+        <div class="cx-item" id="cm-frg"><span class="cx-ilabel">FORGE</span><span class="cx-iarr">›</span></div>
+        <div class="cx-item" id="cm-min"><span class="cx-ilabel">MINING</span><span class="cx-iarr">›</span></div>
+        <div class="cx-item" id="cm-gen"><span class="cx-ilabel">GENETICS</span><span class="cx-iarr">›</span></div>
+        <div class="cx-item" id="cm-civ"><span class="cx-ilabel">CIVILISATION</span><span class="cx-iarr">›</span></div>
+        <div class="cx-item" id="cm-lux"><span class="cx-ilabel">LUX IN TENEBRIS</span><span class="cx-iarr">›</span></div>
+        <div class="cx-item" id="cm-dl" style="border-color:rgba(0,220,200,.5);background:rgba(0,60,50,.5)"><span class="cx-ilabel" style="color:var(--teal)">DOWNLOAD ANSELM</span><span class="cx-iarr" style="color:var(--teal)">↓</span></div>
+      </div>`;
+    el.onclick=el.ontouchend=null;
+    function bind(id,fn){
+      const d=document.getElementById(id);if(!d)return;
+      d.onclick=e=>{e.preventDefault();e.stopPropagation();fn();};
+      d.ontouchend=e=>{e.preventDefault();e.stopPropagation();fn();};
+    }
+    bind('cm-nat', ()=>{codexMode='natives';renderCodex();});
+    bind('cm-dim', ()=>{codexMode='dimensions';renderCodex();});
+    bind('cm-frg', ()=>{codexMode='forge';renderCodex();});
+    bind('cm-min', ()=>{codexMode='mining';renderCodex();});
+    bind('cm-gen', ()=>{codexMode='genetics';renderCodex();});
+    bind('cm-civ', ()=>{codexMode='civilisation';renderCodex();});
+    bind('cm-lux', ()=>{codexMode='lux';luxChapter=0;renderCodex();});
+    bind('cm-dl',  ()=>{codexMode='download';renderCodex();});
+    return;
+  }
+
+  if(codexMode==='natives'){
+    el.innerHTML=`
+      <div class="cx-ptitle">NATIVES</div>
+      <div class="cx-scroll">
+        <div class="cx-ptext">Natives are not your servants. They are your allies.</div>
+        <div class="cx-ptext">Walk near them to earn their trust. Each encounter builds loyalty.</div>
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(200,200,255,.9)">TIER 0 — NEUTRAL</div><div class="cx-ebody">They ignore you. They will not help and will not harm.</div></div>
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(120,200,255,.9)">TIER 1 — ALLY</div><div class="cx-ebody">A blue glow marks them. They follow your lead, gather faster, and will fight beside you.</div></div>
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(255,215,0,.9)">TIER 3 — DEVOTED</div><div class="cx-ebody">Gold light crowns their heads. Fully yours. They defend the Forge, mate willingly, and pass their best traits to the next generation.</div></div>
+        <div class="cx-ptext" style="margin-top:10px">The world remembers what you build with them.</div>
+      </div>
+      <button class="cx-back" id="cdx-back">← BACK</button>`;
+    el.onclick=el.ontouchend=null;
+    const bNat=document.getElementById('cdx-back');
+    if(bNat){bNat.onclick=e=>{e.preventDefault();codexMode='menu';renderCodex();};}
+    return;
+  }
+
+  if(codexMode==='dimensions'){
+    let html='';
+    DLORE.forEach(d=>{
+      html+=`<div class="cx-entry"><div class="cx-ename" style="color:${d.col}">${d.r.toUpperCase()}</div><div class="cx-ebody">NATIVE &nbsp; ${d.animal}<br>HAZARD &nbsp; ${d.haz}<br>BOSS &nbsp;&nbsp; ${d.boss}<br><span style="color:rgba(255,180,50,.8);font-style:italic;display:block;margin-top:5px">${d.desc}</span><br>FORGE &nbsp;&nbsp; ${d.wpn}</div></div>`;
+    });
+    el.innerHTML=`<div class="cx-ptitle">DIMENSIONS</div><div class="cx-scroll">${html}</div><button class="cx-back" id="cdx-back">← BACK</button>`;
+    el.onclick=el.ontouchend=null;
+    const bDim=document.getElementById('cdx-back');
+    if(bDim){bDim.onclick=e=>{e.preventDefault();codexMode='menu';renderCodex();};}
+    return;
+  }
+
+  if(codexMode==='forge'){
+    let html='';
+    FDATA.forEach(w=>{
+      html+=`<div class="cx-entry"><div class="cx-ename" style="color:${w.col}">${w.n}</div><div class="cx-ebody">REALM &nbsp; ${w.r}<br>COST &nbsp;&nbsp; ${w.cost}</div></div>`;
+    });
+    el.innerHTML=`<div class="cx-ptitle">FORGE</div><div class="cx-scroll"><div class="cx-ptext">The Forge sits at the exact centre of every map, inside a Sacred Zone that nothing can overwrite. It is the first thing the Goo will try to reach. The last thing you want to lose.</div>${html}<div class="cx-entry"><div class="cx-ename" style="color:#e8c060">ULTIMATE WEAPON</div><div class="cx-ebody">Combine all five realm weapons at the Forge. Opens all Gateways freely; supercharges combat aura. Required to step onto any Nexus Eye.</div></div></div><button class="cx-back" id="cdx-back">← BACK</button>`;
+    el.onclick=el.ontouchend=null;
+    const bFrg=document.getElementById('cdx-back');
+    if(bFrg){bFrg.onclick=e=>{e.preventDefault();codexMode='menu';renderCodex();};}
+    return;
+  }
+
+  if(codexMode==='mining'){
+    el.innerHTML=`
+      <div class="cx-ptitle">MINING</div>
+      <div class="cx-scroll">
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(180,200,255,.9)">SILVERSTONE</div><div class="cx-ebody">Found as dedicated silver-ore deposits and in grey rock clusters. Walk over a deposit to collect raw Silverstone. Carry it to the Obelisk — loyal natives deposit it automatically.</div></div>
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(255,215,80,.9)">THE OBELISK</div><div class="cx-ebody"><b>10 raw Silverstone → 2 refined Silverstone.</b> The Obelisk refines in batches. Step on it to collect. Refining requires at least one loyal native working nearby.</div></div>
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(200,140,255,.9)">MINING CRYSTALS (MSM)</div><div class="cx-ebody">Walk onto a glowing crystal deposit.<br><br><b>Cost: 1 refined Silverstone</b> — preferred path.<br><b>OR: 10 raw Silverstone</b> — works but wastes refining potential.<br><br>The forged weapon is the permanent key to each Gateway — no MSM cost required to travel.</div></div>
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(255,180,80,.9)">RING OF THE GRID</div><div class="cx-ebody">Wearing this ring grants +1 bonus crystal per mine.</div></div>
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(100,220,255,.9)">TIME CRYSTALS</div><div class="cx-ebody">Forged at the Forge. Tap any open ground tile while holding a Time Crystal to plant it. After 60 seconds it blooms into a 3×3 crop of this dimension's MSM crystals — walk over them to collect.</div></div>
+      </div>
+      <button class="cx-back" id="cdx-back">← BACK</button>`;
+    el.onclick=el.ontouchend=null;
+    const bMin=document.getElementById('cdx-back');
+    if(bMin){bMin.onclick=e=>{e.preventDefault();codexMode='menu';renderCodex();};}
+    return;
+  }
+
+  if(codexMode==='genetics'){
+    el.innerHTML=`
+      <div class="cx-ptitle">GENETICS</div>
+      <div class="cx-scroll">
+        <div class="cx-ptext">Every native carries 10 traits. These are the building blocks of their civilisation.</div>
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(180,255,180,.9)">THE 10 TRAITS</div><div class="cx-ebody"><b>Agility</b> — move speed, faster tile-flipping if crystal-gene carrier<br><b>Work</b> — gathers resources faster, builds roads sooner<br><b>Social</b> — mating range increased, earns loyalty faster<br><b>Faith</b> — speeds up Lux in Tenebris scripture study<br><b>Resilience</b> — survives disputes and goo longer<br><b>Curiosity</b> — wanders further, discovers more tiles<br><b>Gender</b> — required for mating (one of each)<br><b>Dimension</b> — home realm bias, affects cross-dim bonuses<br><b>Hair / Skin</b> — visual only, tracks lineage visually</div></div>
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(255,215,100,.9)">INHERITANCE</div><div class="cx-ebody">Each trait has a 50% chance of coming from either parent. A 15% mutation chance can flip any trait. Cross-dimensional children sometimes inherit both parents' dimension values — these hybrids gain a hybrid bonus to civilisation XP.</div></div>
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(160,80,255,.9)">CRYSTAL GENE</div><div class="cx-ebody">After you destroy a Nexus Eye, 5–10 survivors spawn carrying the <b>crystalGene</b>. It inherits at 50% per offspring. Carriers glow purple-cyan. 10+ tile flips = Dim Fusion — that realm's tile reality is permanently altered.</div></div>
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(100,200,255,.9)">GENERATIONS</div><div class="cx-ebody">Each new child is one generation higher than its parents. Higher-generation natives contribute more civilisation XP per tick. When all five realms make dimensional contact, the Hyper-Holo-Grid triggers Ascension — seeding all dims with elder-trait natives from every bloodline.</div></div>
+      </div>
+      <button class="cx-back" id="cdx-back">← BACK</button>`;
+    el.onclick=el.ontouchend=null;
+    const bGen=document.getElementById('cdx-back');
+    if(bGen){bGen.onclick=e=>{e.preventDefault();codexMode='menu';renderCodex();};}
+    return;
+  }
+
+  if(codexMode==='civilisation'){
+    el.innerHTML=`
+      <div class="cx-ptitle">CIVILISATION</div>
+      <div class="cx-scroll">
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(200,200,255,.9)">HOW PROGRESS WORKS</div><div class="cx-ebody">Civilisation XP accrues each tick based on population, town count, and generation multiplier. Hybrid natives give bonus XP. XP thresholds rise sharply each age.</div></div>
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(180,255,180,.9)">AGES 0–4 (PRIMITIVE → HEAVEN)</div><div class="cx-ebody">Build towns and populate them. Each hut, great hall, and road connection advances the civ. Heaven (Age 4) unlocks extended ages and Lux in Tenebris study.</div></div>
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(255,200,100,.9)">EXTENDED AGES (5–10)</div><div class="cx-ebody">Age 5 — Possession Age: Great Library built<br>Age 6 — Shared Age: Telegraph towers strung<br>Age 7 — Bandwidth Age: Satellite antenna raised<br>Age 8 — Feed Field Age: Feed Tower erected, dimensional contact<br>Age 9 — Hyper-Holo-Grid Age: Grid Node crystallises<br>Age 10 — The On and On: Dimension Seed planted</div></div>
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(160,80,255,.9)">LUX IN TENEBRIS</div><div class="cx-ebody">The ancient scripture has 10 chapters. Study speed depends on faith natives, shrines, the Obelisk, and your presence. Base: 1 chapter per 2 min. With full support: as fast as 1 per 15 sec. The Study Edict halves the interval.<br><br>Open <b>LUX IN TENEBRIS</b> in this Codex to read every word.</div></div>
+        <div class="cx-entry"><div class="cx-ename" style="color:rgba(255,215,0,.9)">HYPER-HOLO-GRID</div><div class="cx-ebody">When five Age-8+ dims make contact, the grid awakens. All dims accelerate to Age 9, and Ascension seeds every realm with enlightened natives carrying mixed bloodlines from all five civilisations.</div></div>
+      </div>
+      <button class="cx-back" id="cdx-back">← BACK</button>`;
+    el.onclick=el.ontouchend=null;
+    const bCiv=document.getElementById('cdx-back');
+    if(bCiv){bCiv.onclick=e=>{e.preventDefault();codexMode='menu';renderCodex();};}
+    return;
+  }
+
+  if(codexMode==='lux'){
+    const LUX=[
+      {n:1,title:'Possession of My Reality',theme:'individual awakening, wandering without purpose becomes purposeful',text:'You are both the wanderer and the world you wander through. When you follow your instincts without resistance — turning where the heart says turn, walking where the soul says walk — you arrive at a beauty you could never have planned. The moment another soul steps into your path, you understand: this reality was never yours alone to possess.'},
+      {n:2,title:'Shared Reality',theme:'two souls merging, the discovery that reality is co-created',text:'Two bodies in true union transcend the physical and become a single act of creation. In the most intimate surrender, we stop performing life and simply inhabit it — two souls meeting without armor. When eyes speak what words cannot, we glimpse what it means to truly see another human being.'},
+      {n:3,title:'Establishing Consensus of a Reality',theme:'strangers finding common ground, choosing depth over distraction',text:'Chance encounters are the universe arranging its curriculum. A simple conversation between two friends reveals that honesty, patience, and choosing depth over distraction is its own kind of spiritual practice. When we treat others with dignity — not as instruments of our pleasure but as full human beings — life quietly exhales and confirms its goodness.'},
+      {n:4,title:'The Universe Experiencing Itself',theme:'love as the universe knowing itself through another',text:'Every relationship is the universe studying itself through two pairs of eyes. The security we seek in others is a reflection of the unhealed places within us we have not yet had the courage to name. And yet, love — patient, persistent, and willing to truly know another — becomes the very container where both souls can grow.'},
+      {n:5,title:'The Nature of Which Reality is Created',theme:'the self as living gallery, becoming, the revolution of morning',text:'We are not fixed creatures but living galleries, our walls hung with memories that shape who we believe we are. The self is always becoming — fed by solitude, by art, by the willingness to sit with a mother on her birthday and simply be present. Each night of rest is a small death, and each morning a revolution of the self that was seeded in the quiet before sleep.'},
+      {n:6,title:'Birth of Self',theme:'near-death, the voice in darkness, choosing to live',text:'There are moments of stillness — a hillside, a crescent moon, the hum of a city below — where the self is finally, fully one\'s own. Brushing near death as a young man, the narrator was asked to find one reason to live, and in the darkness, love for humanity itself became the light. To know what it is to nearly cease existing is to understand, with every cell, what it means to be magnificently alive.'},
+      {n:7,title:'Understanding Time is Value',theme:'home as a quality of presence, watering what matters',text:'We spend much of our lives hiding from ourselves — behind habits, people, and distractions — not realizing the hiding is the very wound. Home is not a place but a quality of presence, found in the hearts of those who challenge and expand us. Whatever we water with our devoted attention — love, art, friendship — will grow, and that is the only law of creation worth following.'},
+      {n:8,title:'Eternal Bandwidth',theme:'self-love, borrowed vessels, filling life with light',text:'The greatest act of self-love is to recognize yourself as a perfect expression of the universe, not despite your suffering, but including it. When a friend stands at the edge of despair, the wisest gift is a tender reminder that their life belongs to something far vaster than their pain. We are all borrowed vessels; the only rational response to this borrowed life is to fill it with as much light as it can hold.'},
+      {n:9,title:'The Dragon and the Black Box',theme:'surrender, service as the hard work, the black box opens quietly',text:'The darkness we encounter in altered or visionary states is not an enemy — it is the guardian of the next version of ourselves, asking whether we are ready to let the old self go. The \"hard work\" of spiritual growth turns out to be the simplest thing: handing someone a pencil, buying a stranger a meal, offering your presence to a person in need. The black box opens not through grand revelation but through the quiet daily choice to be useful to another human being.'},
+      {n:10,title:'The Discourses of the Actuality',theme:'the hyper-holo-grid, feed fields, the on and on',text:'Two awake souls meeting over tea become a dialogue between dimensions, each thought a doorway into the architecture of existence itself. Every human life is a unique video feed threading through an infinite multiverse, and the inner voice we so often silence is our deepest self guiding us toward the universe that best serves our becoming. The meaning of existence is simply to exist — fully, consciously, spiraling ever forward — because each aware moment adds a new and irreplaceable variable to the eternal unfolding of everything.'},
+    ];
+    const ch=LUX[luxChapter];
+    const isFirst=luxChapter===0, isLast=luxChapter===LUX.length-1;
+    el.innerHTML=`
+      <div class="cx-ptitle" style="font-size:11px;letter-spacing:.2em">LUX IN TENEBRIS</div>
+      <div class="cx-scroll">
+        <div class="cx-entry">
+          <div class="cx-ename" style="color:rgba(255,215,100,.95);font-size:11px">Chapter ${ch.n}: ${ch.title}</div>
+          <div class="cx-ebody" style="font-style:italic;line-height:1.7;color:rgba(220,215,200,.85)">${ch.text}</div>
+          <div style="font-size:8px;letter-spacing:.18em;color:rgba(160,180,200,.4);margin-top:10px;text-transform:uppercase">Theme: ${ch.theme}</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        ${!isFirst?'<button class=\"cx-back\" id=\"lux-prev\" style=\"flex:1\">‹ PREV</button>':'<div style=\"flex:1\"></div>'}
+        <button class="cx-back" id="lux-menu" style="flex:1;font-size:8px">MENU</button>
+        ${!isLast?'<button class=\"cx-back\" id=\"lux-next\" style=\"flex:1\">NEXT ›</button>':'<div style=\"flex:1\"></div>'}
+      </div>`;
+    el.onclick=el.ontouchend=null;
+    const bPrev=document.getElementById('lux-prev');
+    const bNext=document.getElementById('lux-next');
+    const bMnu=document.getElementById('lux-menu');
+    if(bPrev) bPrev.onclick=e=>{e.preventDefault();luxChapter--;renderCodex();};
+    if(bNext) bNext.onclick=e=>{e.preventDefault();luxChapter++;renderCodex();};
+    if(bMnu)  bMnu.onclick=e=>{e.preventDefault();codexMode='menu';renderCodex();};
+    return;
+  }
+
+    if(codexMode==='download'){
+    el.innerHTML=`
+      <div class="cx-ptitle">GET THE GAME</div>
+      <div class="cx-scroll" style="text-align:center;padding-bottom:10px">
+        <div class="cx-ptext" style="text-align:center;font-style:normal;margin-bottom:24px">A single HTML file. Open in any browser. No install. No account. No cost.</div>
+        <a href="Anselm-v3_7_0-1.html" download="Anselm-v3_7_0-1.html" class="cx-dl">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Download ANSELM v3.7.0-1
+        </a>
+        <p class="cx-dnote">Vanilla JS · Canvas · Web Audio API · 16,200+ lines · No framework · Works offline</p>
+        <div class="cx-entry" style="margin-top:22px;text-align:left">
+          <div class="cx-ename" style="color:var(--teal)">WHAT IS ANSELM</div>
+          <div class="cx-ebody">Five civilisations building from mud huts to floating cities while an existential corruption spreads from all sides. The genetics engine runs beneath every interaction. Traits pass 50/50 between parents. Fifteen percent mutate into something new. Over generations, the civilisations become something no one designed.<br><br>Issue Edicts, found towns with loyal hands, broker peace between rival realms, and respond to meteors, storms, eclipses, and migrations. Named artifacts remember the bloodlines of those who witnessed the forgings. The Codex remembers what you have learned.<br><br>At Age 8, realms establish Dimensional Contact. When all five connect, the Grid Awakening triggers. At Age 9, even war ends. The spiral continues.</div>
+        </div>
+        <div class="cx-entry" style="text-align:left">
+          <div class="cx-ename" style="color:var(--teal)">LUX IN TENEBRIS</div>
+          <div class="cx-ebody">Light in Darkness. An ancient text the natives study as they age. Ten chapters. Ten characters: Mind, Body, Soul, Self, Order, Life, Time, Eternity, Death, Repeat. Each chapter seeds a new civilisational era. The spiral of everything.</div>
+        </div>
+      </div>
+      <button class="cx-back" id="cdx-back">BACK</button>`;
+    el.onclick=el.ontouchend=null;
+    const b=document.getElementById('cdx-back');
+    if(b){b.onclick=e=>{e.preventDefault();codexMode='menu';renderCodex();};}
+    return;
+  }
+}
+
+function advancePream(){
+  preamIdx++;
+  if(preamIdx>=PREAMBLE.length){codexMode='menu';renderCodex();return;}
+  renderCodex();
+}
+
+/* ════════════════════════════════════════════════════════════
+   AUDIO — ANSELM TITLE THEME (A minor, 56 BPM)
+════════════════════════════════════════════════════════════ */
+let audioCtx=null;
+
+// Create + unlock AudioContext synchronously inside a user gesture,
+// then resolve a promise so note scheduling happens only after context is running.
+function ensureAudio(){
+  if(!audioCtx){
+    try{ audioCtx=new(window.AudioContext||window.webkitAudioContext)(); }
+    catch(e){ return Promise.reject(e); }
+  }
+  if(audioCtx.state==='running') return Promise.resolve(audioCtx);
+  return audioCtx.resume().then(()=>audioCtx);
+}
+
+function getAC(){
+  if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  return audioCtx;
+}
+
+const TR=220.0,TB=60/56,TBR=TB*4;
+const _tf=s=>TR*Math.pow(2,s/12);
+const TV=[
+  {type:'sine',     atk:.005,dM:1.0,vol:.055,oct:0, vib:false},
+  {type:'sine',     atk:.07, dM:.7, vol:.042,oct:0, vib:true },
+  {type:'triangle', atk:.005,dM:.3, vol:.028,oct:0, vib:false},
+  {type:'sawtooth', atk:.30, dM:.9, vol:.018,oct:0, vib:false},
+  {type:'sine',     atk:.25, dM:1.0,vol:.032,oct:-1,vib:false},
+  {type:'sine',     atk:.10, dM:.8, vol:.030,oct:1, vib:true },
+];
+const TS2=[
+  [0,0,0,3,0],[0,4,0,3,0],
+  [12,2,0,1.5,1],[10,2,1.5,1,1],[7,2,2.5,1.5,1],[15,3,0,2,1],[14,3,2,1,1],[12,3,3,3,1],
+  [12,6,0,1.5,1],[10,6,1.5,1,1],[7,6,2.5,1.5,1],[15,7,0,2,1],[14,7,2,1,1],[12,7,3,4,1],
+  [-12,8,0,4,4],[-5,10,0,4,4],[-12,12,0,4,4],[-7,14,0,4,4],
+  [12,8,0,1.5,1],[10,8,1.5,1,1],[7,8,2.5,1.5,1],[15,9,0,2,1],[14,9,2,1,1],[12,9,3,2,1],
+  [10,10,0,1.5,1],[7,10,1.5,1,1],[5,10,2.5,1.5,1],[0,11,0,1.5,1],[3,11,1.5,1,1],[0,11,2.5,3,1],
+  [12,12,0,1.5,1],[10,12,1.5,1,1],[7,12,2.5,1.5,1],[15,13,0,2,1],[14,13,2,1,1],[12,13,3,2,1],
+  [14,14,0,1.5,1],[12,14,1.5,1,1],[10,14,2.5,1.5,1],[15,15,0,2.5,1],[17,15,2.5,1.5,1],[15,15,3.5,2,1],
+  [0,16,0,4,3],[3,16,0,4,3],[7,16,0,4,3],[0,18,0,4,3],[3,18,0,4,3],[7,18,0,4,3],
+  [5,20,0,4,3],[9,20,0,4,3],[12,20,0,4,3],[7,22,0,4,3],[11,22,0,4,3],[14,22,0,4,3],
+  [-12,16,0,4,4],[-12,18,0,4,4],[-7,20,0,4,4],[-5,22,0,4,4],
+  [0,16,0,.5,2],[3,16,.5,.5,2],[7,16,1,.5,2],[12,16,1.5,.5,2],[7,16,2,.5,2],[3,16,2.5,.5,2],[0,16,3,.5,2],[3,16,3.5,.5,2],
+  [0,17,0,.5,2],[3,17,.5,.5,2],[7,17,1,.5,2],[12,17,1.5,.5,2],[7,17,2,.5,2],[3,17,2.5,.5,2],[0,17,3,.5,2],[7,17,3.5,.5,2],
+  [5,18,0,.5,2],[9,18,.5,.5,2],[12,18,1,.5,2],[17,18,1.5,.5,2],[12,18,2,.5,2],[9,18,2.5,.5,2],[5,18,3,.5,2],[9,18,3.5,.5,2],
+  [5,19,0,.5,2],[9,19,.5,.5,2],[12,19,1,.5,2],[17,19,1.5,.5,2],[12,19,2,.5,2],[9,19,2.5,.5,2],[5,19,3,.5,2],[9,19,3.5,.5,2],
+  [7,20,0,.5,2],[11,20,.5,.5,2],[14,20,1,.5,2],[19,20,1.5,.5,2],[14,20,2,.5,2],[11,20,2.5,.5,2],[7,20,3,.5,2],[11,20,3.5,.5,2],
+  [7,21,0,.5,2],[11,21,.5,.5,2],[14,21,1,.5,2],[19,21,1.5,.5,2],[14,21,2,.5,2],[11,21,2.5,.5,2],[7,21,3,.5,2],[14,21,3.5,.5,2],
+  [7,22,0,.5,2],[11,22,.5,.5,2],[14,22,1,.5,2],[19,22,1.5,.5,2],[14,22,2,.5,2],[11,22,2.5,.5,2],[7,22,3,.5,2],[11,22,3.5,.5,2],
+  [7,23,0,.5,2],[11,23,.5,.5,2],[14,23,1,.5,2],[19,23,1.5,.5,2],[14,23,2,.5,2],[11,23,2.5,.5,2],[7,23,3,.5,2],[11,23,3.5,.5,2],
+  [12,16,1,1.5,1],[10,16,2.5,1,1],[7,16,3.5,1,1],[15,17,0,2.5,1],[14,17,2.5,.5,1],[12,17,3,3,1],
+  [12,20,0,1,1],[14,20,1,1,1],[15,20,2,1,1],[17,21,0,2,1],[19,21,2,2,1],
+  [17,22,0,1.5,1],[15,22,1.5,1.5,1],[14,22,3,1,1],[12,23,0,4,1],
+  [0,24,0,4,3],[3,24,0,4,3],[7,24,0,4,3],[12,24,0,4,3],[5,26,0,4,3],[8,26,0,4,3],[12,26,0,4,3],
+  [3,28,0,4,3],[7,28,0,4,3],[10,28,0,4,3],[7,30,0,4,3],[11,30,0,4,3],[14,30,0,4,3],
+  [-12,24,0,4,4],[-7,26,0,4,4],[-9,28,0,4,4],[-5,30,0,4,4],
+  [0,24,0,.5,2],[3,24,.5,.5,2],[7,24,1,.5,2],[12,24,1.5,.5,2],[15,24,2,.5,2],[12,24,2.5,.5,2],[7,24,3,.5,2],[3,24,3.5,.5,2],
+  [0,25,0,.5,2],[3,25,.5,.5,2],[7,25,1,.5,2],[12,25,1.5,.5,2],[15,25,2,.5,2],[12,25,2.5,.5,2],[7,25,3,.5,2],[3,25,3.5,.5,2],
+  [12,24,0,1.5,1],[10,24,1.5,1,1],[7,24,2.5,1.5,1],[15,25,0,2,1],[14,25,2,1,1],[12,25,3,2,1],
+  [19,26,0,1.5,5],[17,26,1.5,1,5],[15,26,2.5,1.5,5],[14,27,0,2,5],[12,27,2,1.5,5],[10,27,3.5,.5,5],
+  [12,28,0,2,5],[15,28,2,1,5],[17,28,3,1,5],[19,29,0,3,5],[17,29,3,1,5],
+  [15,30,0,1.5,1],[12,30,1.5,1,1],[10,30,2.5,1.5,1],[7,31,0,2,1],[10,31,2,1,1],[12,31,3,2,1],
+  [17,30,0,1.5,5],[15,30,1.5,1,5],[12,30,2.5,1.5,5],[10,31,0,4,5],
+  [-12,32,0,8,4],[0,32,0,.5,2],[7,32,2,.5,2],[3,34,0,.5,2],[7,34,2,.5,2],[0,36,0,.5,2],[7,36,2,.5,2],
+  [12,32,0,2,1],[10,32,2,1,1],[7,32,3,1.5,1],[15,33,0,3,1],[14,33,3,1,1],[12,34,0,4,1],
+  [12,36,0,2,1],[7,36,2,1.5,1],[3,36,3.5,1.5,1],[0,37,0,6,1],
+  [-12,39,0,4,0],[-12,41,2,4,0],
+];
+const TL=43;
+
+function _tn(ac,dst,semi,t0,dB,vc){
+  try{
+    const dur=dB*TB, freq=_tf(semi)*Math.pow(2,vc.oct), vol=vc.vol;
+    const o=ac.createOscillator(),e=ac.createGain();
+    o.type=vc.type;o.frequency.value=freq;
+    if(vc.vib){const v=ac.createOscillator(),vg=ac.createGain();v.frequency.value=4.8;vg.gain.value=freq*.006;v.connect(vg);vg.connect(o.frequency);v.start(t0+.14);v.stop(t0+dur+.1);}
+    if(vc.type==='sawtooth'){const f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=600;f.Q.value=.4;o.connect(f);f.connect(e);}else{o.connect(e);}
+    if(vc.type==='triangle'){e.gain.setValueAtTime(0,t0);e.gain.linearRampToValueAtTime(vol,t0+vc.atk);e.gain.exponentialRampToValueAtTime(.0001,t0+dur*vc.dM+.05);}
+    else{e.gain.setValueAtTime(0,t0);e.gain.linearRampToValueAtTime(vol,t0+vc.atk);e.gain.setValueAtTime(vol,t0+dur*vc.dM);e.gain.linearRampToValueAtTime(0,t0+dur+vc.atk*.5);}
+    e.connect(dst);o.start(t0);o.stop(t0+dur+.4);
+    if(vc===TV[0]){const ex=.32,o2=ac.createOscillator(),e2=ac.createGain();o2.type='sine';o2.frequency.value=freq*.998;e2.gain.setValueAtTime(0,t0+ex);e2.gain.linearRampToValueAtTime(vol*.25,t0+ex+.01);e2.gain.exponentialRampToValueAtTime(.0001,t0+ex+dur*.9);o2.connect(e2);e2.connect(dst);o2.start(t0+ex);o2.stop(t0+ex+dur+.2);}
+    if(vc===TV[2]){const ex=.12,o2=ac.createOscillator(),e2=ac.createGain();o2.type='triangle';o2.frequency.value=freq;e2.gain.setValueAtTime(0,t0+ex);e2.gain.linearRampToValueAtTime(vol*.2,t0+ex+.005);e2.gain.exponentialRampToValueAtTime(.0001,t0+ex+.25);o2.connect(e2);e2.connect(dst);o2.start(t0+ex);o2.stop(t0+ex+.3);}
+  }catch(_){}
+}
+
+let _tN=null,_tT=null;
+function playTheme(){
+  if(_tN)return;
+  ensureAudio().then(ac=>{
+    if(_tN)return; // double-check after async gap
+    const m=ac.createGain();m.gain.setValueAtTime(0,ac.currentTime);m.gain.linearRampToValueAtTime(.7,ac.currentTime+3);m.connect(ac.destination);
+    const ld=TL*TBR;let ls=ac.currentTime+.5;
+    function sched(){if(!_tN)return;while(ls<ac.currentTime+ld*1.5){for(const[s,b,bt,d,v]of TS2){const t=ls+b*TBR+bt*TB;_tn(ac,m,s,t,d,TV[v]);}ls+=ld;}}
+    sched();_tT=setInterval(sched,3000);_tN={m,ac};
+  }).catch(()=>{});
+}
+function stopTheme(){if(_tT){clearInterval(_tT);_tT=null;}if(_tN){const{m,ac}=_tN;m.gain.linearRampToValueAtTime(0,ac.currentTime+2.5);_tN=null;}}
+
+let _sOn=false, _auto=false;
+const sndBtn=document.getElementById('snd');
+
+// Mobile-safe audio start: create AudioContext synchronously inside gesture
+function _startAudio(){
+  // Create context synchronously while still inside the gesture callback
+  if(!audioCtx){
+    try{ audioCtx=new(window.AudioContext||window.webkitAudioContext)(); }
+    catch(ex){ return; }
+  }
+  // Resume and play — resume() MUST be called synchronously in the gesture
+  const resumePromise=audioCtx.resume();
+  function afterResume(){
+    if(!_sOn){ _sOn=true; sndBtn.textContent='♫'; sndBtn.classList.add('on'); playTheme(); }
+  }
+  if(resumePromise && typeof resumePromise.then==='function'){
+    resumePromise.then(afterResume).catch(()=>{});
+  } else {
+    afterResume();
+  }
+}
+
+sndBtn.addEventListener('click',()=>{
+  if(!_sOn){
+    _auto=true;
+    _startAudio();
+  } else {
+    _sOn=false;
+    sndBtn.textContent='♪';
+    sndBtn.classList.remove('on');
+    stopTheme();
+  }
+});
+
+// Auto-start on first gesture — touchstart fires before pointerdown on mobile
+function _as(){
+  if(_auto) return;
+  _auto=true;
+  _startAudio();
+}
+document.addEventListener('touchstart', _as, {once:true, passive:true});
+document.addEventListener('pointerdown', _as, {once:true, passive:true});
+document.addEventListener('keydown', _as, {once:true, passive:true});
+
+// Initial render
+tick3d();
+renderer.render(scene,camera);
+</script>
+</body>
+</html>
