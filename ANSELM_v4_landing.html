@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANSELM — Free Browser Strategy Game</title>
+<meta name="description" content="One wrapping world. Five organic biomes. A single Nexus Eye of corruption. Guide civilisations from primitive huts to the age of the on and on. Free, single HTML file, no install.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="author" content="Indie Developer, Austin TX">
+<meta name="keywords" content="free browser game, HTML5 strategy game, no download, indie game, pixel art, civilization builder, survival game, procedural generation">
+<link rel="canonical" href="https://yourdomain.com/anselm">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="ANSELM — Free Browser Strategy Game">
+<meta property="og:description" content="One world. Five biomes. A single eye of corruption. Free single-file HTML5 game — open in any browser and play.">
+<meta property="og:url" content="https://yourdomain.com/anselm">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ANSELM — Free Browser Strategy Game">
+<meta name="twitter:description" content="One world. Five biomes. A single eye of corruption.">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%2303030a'/><text x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='20' fill='%23c8a0e8'>A</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='40' fill='%2303030a'/><text x='90' y='130' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='120' fill='%23c8a0e8'>A</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"VideoGame",
+  "name":"ANSELM","softwareVersion":"4.0",
+  "description":"Free single-file HTML5 browser game. One wrapping cylindrical world with five organic biomes. Guide native civilisations from Age 0 to Age 10 while containing the Nexus Eye corruption. No download, no install.",
+  "url":"https://yourdomain.com/anselm",
+  "gamePlatform":["Web Browser","HTML5"],
+  "applicationCategory":"Game",
+  "applicationSubCategory":"Strategy Game",
+  "genre":["Survival","Strategy","Indie","Simulation","Pixel Art"],
+  "numberOfPlayers":{"@type":"QuantitativeValue","minValue":1,"maxValue":1},
+  "offers":{"@type":"Offer","price":"0.00","priceCurrency":"USD","availability":"https://schema.org/InStock","description":"Free to play. Single HTML file, no account required."},
+  "author":{"@type":"Person","description":"Indie developer focused on pixel art, web development, and AI","address":{"@type":"PostalAddress","addressLocality":"Austin","addressRegion":"TX","addressCountry":"US"}},
+  "inLanguage":"en","isAccessibleForFree":true,
+  "featureList":[
+    "One wrapping cylindrical world — 160x90 tiles, five organic biomes with Voronoi-seeded borders",
+    "Native AI with autonomous gather, build, trade, mate, and sleep behaviours",
+    "10-trait genetic inheritance engine — 50/50 parent blending with 15% mutation",
+    "Civilisation ages 0-10: Primitive through The On and On",
+    "Lux in Tenebris — ten-chapter philosophical text driving ages 5-10",
+    "Five biome weapons and the Ultimate Weapon forging chain",
+    "Five physical gateway arches with unlock conditions",
+    "Nexus Eye corruption faction with mirroring evolution",
+    "Procedural audio via Web Audio API — no audio files",
+    "All art via fillRect — no image files",
+    "Single HTML file, works offline"
+  ]
+}
+</script>
+
+<style>
+:root {
+  --ink:   #03030a;
+  --pink:  #c9919a;
+  --green: #8ab89a;
+  --purple:#a891c4;
+  --blue:  #8aabbe;
+  --beige: #c4b89a;
+  --teal:  #00dcc0;
+  --silver:#c0c8d8;
+  --gold:  #e8c060;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; background: var(--ink); overflow-x: hidden; }
+
+/* ── SEO hidden ── */
+.vh { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
+
+/* ── Layout ── */
+#scroll-space { height: 700vh; }
+#c {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 0; display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* ── Title banner ── */
+#tbanner {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 30;
+  text-align: center; padding: 30px 20px 22px;
+  background: linear-gradient(to bottom, rgba(3,3,10,.9) 0%, transparent 100%);
+  pointer-events: none; transition: opacity .7s;
+}
+.tb-eye {
+  font-family: 'Share Tech Mono', monospace; font-size: .58rem;
+  letter-spacing: .5em; text-transform: uppercase;
+  color: rgba(168,145,196,.48); margin-bottom: 9px;
+}
+.tb-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(3.2rem, 9vw, 7.2rem);
+  font-weight: 900; letter-spacing: .13em; line-height: 1;
+  background: linear-gradient(168deg, #fff 0%, var(--silver) 36%, var(--purple) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  filter: drop-shadow(0 0 52px rgba(168,145,196,.4));
+  animation: titleIn 1.3s cubic-bezier(.18,.82,.38,1) both;
+}
+@keyframes titleIn { from { opacity:0; transform:translateY(-10px) } to { opacity:1; transform:none } }
+.tb-sub {
+  font-family: 'Crimson Pro', serif; font-size: clamp(.8rem, 1.4vw, 1rem);
+  font-weight: 300; font-style: italic;
+  color: rgba(192,200,216,.45); margin-top: 7px; letter-spacing: .06em;
+  animation: subIn 1.5s .35s both;
+}
+@keyframes subIn { from { opacity:0 } to { opacity:1 } }
+
+/* ── Overlay base ── */
+.ov, .bov {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 10; pointer-events: none; opacity: 0;
+  transition: opacity .5s ease;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-end;
+  padding-bottom: 11vh;
+}
+.ov.vis, .bov.vis { opacity: 1; }
+
+/* ── Hero ── */
+#hero { justify-content: flex-end; padding-bottom: 16vh; align-items: center; }
+.hero-body {
+  font-family: 'Crimson Pro', serif; font-size: clamp(.9rem, 1.6vw, 1.06rem);
+  font-weight: 300; font-style: italic;
+  color: rgba(192,200,216,.5); text-align: center;
+  max-width: 460px; line-height: 1.95; margin-bottom: 32px;
+}
+.cta-btn {
+  font-family: 'Cinzel', serif; font-size: clamp(.72rem, 1.3vw, .86rem);
+  font-weight: 600; letter-spacing: .28em; text-transform: uppercase;
+  padding: 14px 44px; background: rgba(0,220,192,.06);
+  border: 1px solid var(--teal); color: var(--teal);
+  cursor: pointer; text-decoration: none; display: inline-block;
+  pointer-events: all; transition: background .3s, box-shadow .3s;
+}
+.cta-btn:hover { background: rgba(0,220,192,.16); box-shadow: 0 0 38px rgba(0,220,192,.22); }
+
+/* ── Biome overlays ── */
+.bpanel {
+  max-width: 510px; width: 90%; text-align: center;
+  padding: 34px 28px 26px;
+  background: radial-gradient(ellipse at center, rgba(3,3,10,.84) 12%, transparent 78%);
+}
+.b-coord {
+  font-family: 'Share Tech Mono', monospace; font-size: .56rem;
+  letter-spacing: .44em; text-transform: uppercase;
+  color: var(--bc); margin-bottom: 10px; opacity: .62;
+}
+.b-name {
+  font-family: 'Cinzel', serif; font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900; letter-spacing: .06em; color: #fff;
+  text-shadow: 0 0 70px var(--bc); margin-bottom: 16px; line-height: 1;
+}
+.b-body {
+  font-family: 'Crimson Pro', serif; font-size: .98rem;
+  font-weight: 300; color: rgba(228,218,225,.76);
+  line-height: 1.92; margin-bottom: 17px;
+}
+.b-chip {
+  display: inline-block; font-family: 'Share Tech Mono', monospace;
+  font-size: .53rem; letter-spacing: .16em;
+  padding: 4px 11px; border: 1px solid var(--bc);
+  color: var(--bc); margin: 3px; opacity: .65;
+}
+
+/* ── Traveller ── */
+#traveller { justify-content: center; align-items: center; padding: 0 24px; }
+.trav-wrap { max-width: 540px; text-align: center; }
+.trav-ey {
+  font-family: 'Share Tech Mono', monospace; font-size: .56rem;
+  letter-spacing: .44em; text-transform: uppercase;
+  color: rgba(192,200,216,.3); margin-bottom: 18px;
+}
+.trav-h {
+  font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3.2vw, 2.3rem);
+  font-weight: 600; letter-spacing: .05em; color: rgba(255,255,255,.84);
+  margin-bottom: 22px; line-height: 1.35;
+}
+.trav-b {
+  font-family: 'Crimson Pro', serif; font-size: clamp(.9rem, 1.5vw, 1.04rem);
+  font-weight: 300; font-style: italic; color: rgba(192,200,216,.58);
+  line-height: 2.05;
+}
+
+/* ── Lux in Tenebris ── */
+#lux { justify-content: center; align-items: center; padding: 0 20px; }
+.lux-wrap { max-width: 600px; width: 100%; text-align: center; }
+.lux-t {
+  font-family: 'Cinzel', serif; font-size: clamp(1.1rem, 2.4vw, 1.65rem);
+  font-weight: 900; letter-spacing: .22em; text-transform: uppercase;
+  color: rgba(224,200,242,.8); margin-bottom: 6px;
+}
+.lux-s {
+  font-family: 'Share Tech Mono', monospace; font-size: .54rem;
+  letter-spacing: .36em; text-transform: uppercase;
+  color: rgba(168,145,196,.38); margin-bottom: 18px;
+}
+.lux-p {
+  font-family: 'Crimson Pro', serif; font-size: .9rem;
+  font-weight: 300; font-style: italic; color: rgba(200,188,218,.58);
+  line-height: 1.9; margin-bottom: 22px;
+  border-top: 1px solid rgba(168,145,196,.13); padding-top: 18px;
+  max-width: 500px; margin-left: auto; margin-right: auto;
+}
+.lux-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: left;
+}
+.lux-c {
+  border: 1px solid rgba(168,145,196,.11);
+  padding: 11px 13px; background: rgba(168,145,196,.03);
+}
+.lux-n {
+  font-family: 'Share Tech Mono', monospace; font-size: .47rem;
+  letter-spacing: .35em; color: rgba(168,145,196,.4); margin-bottom: 4px;
+}
+.lux-nm {
+  font-family: 'Cinzel', serif; font-size: .69rem;
+  letter-spacing: .1em; color: rgba(224,200,242,.7); margin-bottom: 3px;
+}
+.lux-th {
+  font-family: 'Crimson Pro', serif; font-size: .8rem;
+  font-style: italic; color: rgba(192,178,210,.45); line-height: 1.45;
+}
+
+/* ── Nexus ── */
+#nexus-sec { justify-content: center; align-items: center; padding: 0 24px; }
+.nex-wrap { max-width: 480px; text-align: center; }
+.nex-ey {
+  font-family: 'Share Tech Mono', monospace; font-size: .54rem;
+  letter-spacing: .44em; text-transform: uppercase;
+  color: rgba(110,15,142,.62); margin-bottom: 16px;
+}
+.nex-h {
+  font-family: 'Cinzel', serif; font-size: clamp(1.4rem, 3vw, 2.1rem);
+  font-weight: 900; letter-spacing: .05em;
+  color: rgba(255,255,255,.74); margin-bottom: 20px; line-height: 1.3;
+  text-shadow: 0 0 60px rgba(110,15,142,.52);
+}
+.nex-b {
+  font-family: 'Crimson Pro', serif; font-size: .98rem;
+  font-weight: 300; font-style: italic;
+  color: rgba(200,185,218,.52); line-height: 1.95;
+}
+
+/* ── Final CTA ── */
+#final-sec { justify-content: center; align-items: center; padding: 0 24px; }
+.fin-wrap { text-align: center; max-width: 520px; }
+.fin-mantra {
+  font-family: 'Crimson Pro', serif; font-size: clamp(1.1rem, 2.6vw, 1.7rem);
+  font-weight: 300; font-style: italic;
+  color: rgba(255,255,255,.66); line-height: 1.65;
+  margin-bottom: 38px; letter-spacing: .03em;
+}
+.fin-mantra em { font-style: normal; color: rgba(255,255,255,.9); }
+.fin-note {
+  margin-top: 12px; font-family: 'Share Tech Mono', monospace;
+  font-size: .5rem; letter-spacing: .22em; color: rgba(200,195,200,.18);
+}
+
+/* ── UI chrome ── */
+#shint {
+  position: fixed; bottom: 36px; left: 50%; transform: translateX(-50%);
+  z-index: 30; pointer-events: none;
+  font-family: 'Share Tech Mono', monospace; font-size: .54rem;
+  letter-spacing: .44em; color: rgba(200,195,200,.24);
+  transition: opacity .6s;
+  animation: hpulse 2.5s ease-in-out infinite;
+}
+@keyframes hpulse { 0%,100% { opacity:.18 } 50% { opacity:.65 } }
+
+#pip {
+  position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
+  z-index: 30; display: flex; flex-direction: column; gap: 9px; pointer-events: none;
+}
+.pd {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(255,255,255,.1); transition: all .4s;
+}
+.pd.on { background: rgba(255,255,255,.55); box-shadow: 0 0 7px rgba(255,255,255,.25); }
+
+#snd {
+  position: fixed; bottom: 26px; right: 26px; z-index: 100;
+  width: 38px; height: 38px;
+  border: 1px solid rgba(168,145,196,.2);
+  background: rgba(5,5,12,.85); color: rgba(168,145,196,.38);
+  font-size: 14px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .3s; opacity: 0;
+  animation: sfadein 1s 2s ease forwards;
+  font-family: 'Share Tech Mono', monospace;
+}
+#snd:hover { color: rgba(168,145,196,.88); border-color: rgba(168,145,196,.46); }
+#snd.on  { color: rgba(168,145,196,.85); border-color: rgba(168,145,196,.42); }
+@keyframes sfadein { to { opacity:1 } }
+
+/* Hidden archive link — bottom-left, near invisible */
+#arch {
+  position: fixed; bottom: 20px; left: 20px; z-index: 100;
+  font-family: 'Share Tech Mono', monospace; font-size: .72rem;
+  color: rgba(255,255,255,.04); text-decoration: none;
+  transition: color .5s; pointer-events: all;
+  cursor: default;
+}
+#arch:hover { color: rgba(168,145,196,.22); cursor: pointer; }
+
+/* Scanlines */
+#scan {
+  position: fixed; inset: 0; z-index: 9; pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom, transparent 0, transparent 2px,
+    rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px);
+  opacity: .7;
+}
+
+@media (max-width: 580px) {
+  .lux-grid { grid-template-columns: 1fr; }
+  .bpanel, .trav-wrap, .lux-wrap, .nex-wrap, .fin-wrap { padding: 20px 14px; }
+}
+</style>
+</head>
+<body>
+
+<noscript>
+  <style>#scroll-space,#c,#tbanner,.ov,.bov,#snd,#pip,#scan,#shint,#arch{display:none}</style>
+  <div style="font-family:Georgia,serif;max-width:640px;margin:60px auto;padding:24px;color:#ddd;background:#03030a;line-height:1.8">
+    <h1 style="font-size:2.5rem;margin-bottom:12px;color:#fff">ANSELM</h1>
+    <p style="color:#a891c4;margin-bottom:16px;font-style:italic">One world. Five biomes. A single eye of corruption.</p>
+    <p>Play as the Traveller in a wrapping cylindrical world. Nurture five civilisations from primitive huts to Heaven and beyond. Forge weapons, contain the Nexus Eye, and survive the dark reflection of everything you build.</p>
+    <p style="margin-top:16px"><strong>JavaScript is required to experience this page.</strong></p>
+    <p style="margin-top:20px"><a href="ANSELM_v4.html" download style="color:#00dcc0">Download ANSELM V4 (free, single HTML file)</a></p>
+  </div>
+</noscript>
+
+<main>
+<div id="scroll-space"></div>
+<canvas id="c" role="img" aria-label="ANSELM — procedural top-down pixel-art world map, five organic biomes on a wrapping cylindrical surface, Nexus Eye pulsing in the Purple Highlands"></canvas>
+
+<!-- Title banner -->
+<div id="tbanner" aria-hidden="true">
+  <p class="tb-eye">There is always, only, the on.</p>
+  <h1 class="tb-title">ANSELM</h1>
+  <p class="tb-sub">One world. Five biomes. A single eye of corruption.</p>
+</div>
+
+<!-- Hero -->
+<div class="ov" id="hero" aria-hidden="true">
+  <p class="hero-body">You walk a world that moves without you. Towns rise and fall between your visits. Civilisations make their own decisions. You are the catalyst.</p>
+  <a class="cta-btn" href="ANSELM_v4.html" download>Download Free · Single HTML File</a>
+  <p style="margin-top:15px;font-family:'Share Tech Mono',monospace;font-size:.52rem;letter-spacing:.44em;color:rgba(200,195,200,.19);animation:hpulse 2.5s ease-in-out infinite">SCROLL</p>
+</div>
+
+<!-- Biome: Pink Lowlands -->
+<div class="bov" id="b0" aria-hidden="true" style="--bc:var(--pink)">
+  <div class="bpanel">
+    <p class="b-coord">Pink Lowlands · SW · Start</p>
+    <h2 class="b-name">Pink Lowlands</h2>
+    <p class="b-body">The Ashfawn drift through rose-tinted meadows. The Traveller's first steps fall here. Salt deposits wait at the surface. Cured meat feeds the first towns. The world opens from this corner.</p>
+    <span class="b-chip">cured meat</span>
+    <span class="b-chip">salt</span>
+    <span class="b-chip">Ashen Blade</span>
+  </div>
+</div>
+
+<!-- Biome: Green Forest -->
+<div class="bov" id="b1" aria-hidden="true" style="--bc:var(--green)">
+  <div class="bpanel">
+    <p class="b-coord">Green Forest · NW</p>
+    <h2 class="b-name">Green Forest</h2>
+    <p class="b-body">Ancient root and canopy. The Mosscrawler winds between the trees. Every felled trunk leaves a stump that remembers. Herbs, resin, and lumber sustain the oldest civilisations in the world.</p>
+    <span class="b-chip">herbs</span>
+    <span class="b-chip">resin</span>
+    <span class="b-chip">lumber</span>
+    <span class="b-chip">Verdant Spear</span>
+  </div>
+</div>
+
+<!-- Biome: Purple Highlands -->
+<div class="bov" id="b2" aria-hidden="true" style="--bc:var(--purple)">
+  <div class="bpanel">
+    <p class="b-coord">Purple Highlands · N · Nexus</p>
+    <h2 class="b-name">Purple Highlands</h2>
+    <p class="b-body">The Voidmoth navigates on invisible currents above the peaks. Ore and rare crystals run deep beneath the stone. The Eye sits here. Everything the world builds, it mirrors in darkness.</p>
+    <span class="b-chip">ore</span>
+    <span class="b-chip">rare crystals</span>
+    <span class="b-chip">Voidreaver</span>
+  </div>
+</div>
+
+<!-- Biome: Blue Coast -->
+<div class="bov" id="b3" aria-hidden="true" style="--bc:var(--blue)">
+  <div class="bpanel">
+    <p class="b-coord">Blue Coast · NE</p>
+    <h2 class="b-name">Blue Coast</h2>
+    <p class="b-body">The Driftray trace the shoreline at the edge of deep water. Pearls surface where the tide pulls back. Dyes emerge from the reef floor. Fishing grounds feed coastal towns across the age span.</p>
+    <span class="b-chip">fish</span>
+    <span class="b-chip">pearls</span>
+    <span class="b-chip">dyes</span>
+    <span class="b-chip">Tidecaller</span>
+  </div>
+</div>
+
+<!-- Biome: Beige Desert -->
+<div class="bov" id="b4" aria-hidden="true" style="--bc:var(--beige)">
+  <div class="bpanel">
+    <p class="b-coord">Beige Desert · SE</p>
+    <h2 class="b-name">Beige Desert</h2>
+    <p class="b-body">The Dustleaper vanishes and reappears in the heat shimmer. Spice fields grow slowly between the glass dunes. The final threshold before the world wraps back to where the Traveller began.</p>
+    <span class="b-chip">spice</span>
+    <span class="b-chip">glass</span>
+    <span class="b-chip">dates</span>
+    <span class="b-chip">Duskbrand</span>
+  </div>
+</div>
+
+<!-- Traveller -->
+<div class="ov" id="traveller" aria-hidden="true">
+  <div class="trav-wrap">
+    <p class="trav-ey">The Traveller</p>
+    <h2 class="trav-h">You walk a world that moves with or without you.</h2>
+    <p class="trav-b">Towns rise and fall between your visits. Natives gather, build, dispute, mate, and sleep on their own schedule. A raid you stopped three seasons ago shapes what those natives train today. You introduce conditions — the world decides what to do next. The consequences compound.</p>
+  </div>
+</div>
+
+<!-- Lux in Tenebris -->
+<div class="ov" id="lux" aria-hidden="true">
+  <div class="lux-wrap">
+    <p class="lux-t">Lux in Tenebris</p>
+    <p class="lux-s">Light in Darkness · Ten Chapters</p>
+    <p class="lux-p">The philosophical engine of civilisational development. Every civilisation past Heaven studies it. The ages emerge from it. A player who reads it understands more deeply. A player who never reads it simply feels that depth.</p>
+    <div class="lux-grid">
+      <div class="lux-c"><p class="lux-n">Ch. 1</p><p class="lux-nm">Mind</p><p class="lux-th">Computation and process</p></div>
+      <div class="lux-c"><p class="lux-n">Ch. 2</p><p class="lux-nm">Body</p><p class="lux-th">Construction and form</p></div>
+      <div class="lux-c"><p class="lux-n">Ch. 3</p><p class="lux-nm">Soul</p><p class="lux-th">The operator within</p></div>
+      <div class="lux-c"><p class="lux-n">Ch. 4</p><p class="lux-nm">Self</p><p class="lux-th">Unified current-state</p></div>
+      <div class="lux-c"><p class="lux-n">Ch. 5</p><p class="lux-nm">Order</p><p class="lux-th">The spiral of everything</p></div>
+      <div class="lux-c"><p class="lux-n">Ch. 6</p><p class="lux-nm">Life</p><p class="lux-th">Perceived value and existence</p></div>
+      <div class="lux-c"><p class="lux-n">Ch. 7</p><p class="lux-nm">Time</p><p class="lux-th">Phases and becoming</p></div>
+      <div class="lux-c"><p class="lux-n">Ch. 8</p><p class="lux-nm">Eternity</p><p class="lux-th">The eternal on and on</p></div>
+      <div class="lux-c"><p class="lux-n">Ch. 9</p><p class="lux-nm">Death</p><p class="lux-th">End of phase and rebirth</p></div>
+      <div class="lux-c"><p class="lux-n">Ch. 0</p><p class="lux-nm">Repeat</p><p class="lux-th">The program begins again</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- Nexus -->
+<div class="ov" id="nexus-sec" aria-hidden="true">
+  <div class="nex-wrap">
+    <p class="nex-ey">◈ Nexus Eye · Purple Highlands</p>
+    <h2 class="nex-h">The dark reflection of everything you build.</h2>
+    <p class="nex-b">The Eye sits in the Purple Highlands. Its corruption spreads outward in silence. Every town your civilisations raise, every gate you open, every age they pass through — the Eye deepens alongside them. Progress and danger rise together.</p>
+  </div>
+</div>
+
+<!-- Final CTA -->
+<div class="ov" id="final-sec" aria-hidden="true">
+  <div class="fin-wrap">
+    <p class="fin-mantra">"There is always, only, the on.<br><em>Spiral forward.</em>"</p>
+    <a class="cta-btn" href="ANSELM_v4.html" download>Download Free · Single HTML File</a>
+    <p class="fin-note">v4 · austin tx · single html file · works offline</p>
+  </div>
+</div>
+
+<!-- UI chrome -->
+<div id="shint" aria-hidden="true">SCROLL</div>
+<nav id="pip" aria-label="Page progress">
+  <div class="pd"></div><div class="pd"></div><div class="pd"></div>
+  <div class="pd"></div><div class="pd"></div><div class="pd"></div>
+  <div class="pd"></div><div class="pd"></div><div class="pd"></div>
+  <div class="pd"></div>
+</nav>
+<button id="snd" aria-label="Toggle ambient music">♪</button>
+<a id="arch" href="ANSELM_v3_7_1_landing.html" title="v3" tabindex="-1" aria-hidden="true">◈</a>
+<div id="scan" aria-hidden="true"></div>
+
+<!-- SEO hidden content -->
+<section class="vh" aria-label="Full game information for search engines">
+  <h2>ANSELM V4 — Free Browser Strategy Game, No Download Required</h2>
+  <p>ANSELM is a free single-file HTML5 browser game. One wrapping cylindrical world with five organic biome zones: Pink Lowlands (SW, starting area), Green Forest (NW), Purple Highlands (N, Nexus Eye source), Blue Coast (NE), and Beige Desert (SE). The world wraps east to west — travelling far enough east returns you to where you started. Play as the Traveller guiding native civilisations from Age 0 (Primitive) through Age 10 (The On and On). A single Nexus Eye corruption source in the Purple Highlands spreads outward as the world develops. Forge five biome weapons and the Ultimate Weapon to defeat the Eye. Free, single HTML file, no install, works offline.</p>
+  <h3>Five Biomes</h3>
+  <p>Pink Lowlands (SW, player start): Ashfawn animal, cured meat and salt resources, Ashen Blade biome weapon, gateway always open.</p>
+  <p>Green Forest (NW): Mosscrawler animal, herbs, resin, lumber resources, Verdant Spear biome weapon, gateway requires Ashen Blade.</p>
+  <p>Purple Highlands (N, Nexus Eye at approx. tile 88,22): Voidmoth animal, ore and rare crystals, Voidreaver biome weapon, gateway requires Verdant Spear.</p>
+  <p>Blue Coast (NE): Driftray animal, fish, pearls, dyes resources, Tidecaller biome weapon, gateway requires Voidreaver.</p>
+  <p>Beige Desert (SE): Dustleaper animal, spice, glass, dates resources, Duskbrand biome weapon, gateway requires Tidecaller.</p>
+  <h3>Native Civilisation</h3>
+  <p>Each biome supports native civilisations that build, gather, trade, mate, and dispute autonomously. Towns progress through ages 0-10. A 10-trait genetic inheritance engine governs native DNA: 50/50 parent blending with 15% mutation rate. Hard caps: 80 living natives per biome, 150 corrupted natives total, 4 towns per biome.</p>
+  <h3>Lux in Tenebris</h3>
+  <p>Ten-chapter philosophical text driving civilisation ages 5-10. The characters: Mind (computation), Body (construction), Soul (operator within), Self (unified current-state), Order (spiral of everything), Life (perceived value and existence), Time (phases and becoming), Eternity (the eternal on and on), Death (end of phase and rebirth), Repeat (the program begins again).</p>
+  <h3>The Nexus Eye</h3>
+  <p>The Nexus Eye sits in the Purple Highlands at approximately tile coordinate (88,22). It functions as an active faction, spreading goo corruption outward as the world develops. Corrupted natives spawn from goo-covered tiles. The Eye is destroyed using the Ultimate Weapon forged from all five biome weapons.</p>
+</section>
+</main>
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   ANSELM V4 LANDING — Canvas World + Scroll Engine
+   All art: fillRect only. No images, no THREE.js.
+════════════════════════════════════════════════════════════ */
+
+const MAP_W = 160, MAP_H = 90;
+const NEXUS_X = 88, NEXUS_Y = 18;
+
+// Biome Voronoi seeds (tile coordinates)
+const SEEDS = [
+  {x:35,  y:72}, // 0 Pink SW
+  {x:35,  y:20}, // 1 Green NW
+  {x:88,  y:18}, // 2 Purple N-center
+  {x:130, y:20}, // 3 Blue NE
+  {x:130, y:72}, // 4 Beige SE
+];
+
+// Base colours [r,g,b]
+const BASE  = [[201,145,154],[130,178,148],[162,138,192],[130,165,188],[190,178,148]];
+const TREE  = [[142, 88,100],[ 68,130, 85],[ 98, 78,130],[ 78,118,158],[148,138,100]];
+const WATER = [[ 85,110,172],[ 78,148,178],[ 88,108,182],[ 72,138,200],[ 95,132,178]];
+const ROCK  = [[108,106,100],[82,115, 90],[102, 92,115],[ 88,102,120],[126,120,105]];
+
+// Terrain thresholds: [water, tree, rock] per biome
+const WT = [.28,.38,.22,.44,.10];
+const TT = [.56,.72,.50,.64,.28];
+const RT = [.82,.88,.78,.85,.62];
+
+// Fast hash 0-1
+function fh(x,y) {
+  let v = Math.imul((x*374761393+y*1103515245)|0, 0x45d9f3b)|0;
+  v = Math.imul(v^(v>>>16), 0x45d9f3b)|0;
+  return ((v^(v>>>16))>>>0)/4294967296;
+}
+
+// World maps
+const biomeMap = new Uint8Array(MAP_W*MAP_H);
+const terrMap  = new Uint8Array(MAP_W*MAP_H); // 0=ground,1=tree,2=water,3=rock,4=goo
+const vrMap    = new Int8Array(MAP_W*MAP_H);
+const vgMap    = new Int8Array(MAP_W*MAP_H);
+const vbMap    = new Int8Array(MAP_W*MAP_H);
+
+(function buildWorld(){
+  for(let ty=0;ty<MAP_H;ty++){
+    for(let tx=0;tx<MAP_W;tx++){
+      // Voronoi biome (wrap x)
+      let best=0, bestD=1e9;
+      for(let i=0;i<5;i++){
+        let dx=Math.abs(tx-SEEDS[i].x);
+        if(dx>MAP_W/2) dx=MAP_W-dx;
+        const d=dx*dx+(ty-SEEDS[i].y)**2;
+        if(d<bestD){bestD=d;best=i;}
+      }
+      const b=best;
+      biomeMap[ty*MAP_W+tx]=b;
+
+      // 3-octave noise for terrain
+      const n = fh(tx,ty)*.56 + fh(tx*2+7,ty*2+3)*.28 + fh(tx*4+13,ty*4+11)*.16;
+      let ter=0;
+      if     (n<WT[b]) ter=2;
+      else if(n<TT[b]) ter=0;
+      else if(n<RT[b]) ter=1;
+      else             ter=3;
+
+      // Nexus goo zone (purple biome, radius ~6 around 88,18)
+      if(b===2){
+        const nd=Math.hypot(tx-NEXUS_X, ty-NEXUS_Y);
+        if(nd < 5.5 + fh(tx*3,ty*5)*2.5) ter=4;
+      }
+      terrMap[ty*MAP_W+tx]=ter;
+
+      // Per-tile colour variation ±12
+      vrMap[ty*MAP_W+tx] = ((fh(tx*7, ty*11)-.5)*24)|0;
+      vgMap[ty*MAP_W+tx] = ((fh(tx*11,ty*7 )-.5)*24)|0;
+      vbMap[ty*MAP_W+tx] = ((fh(tx*13,ty*3 )-.5)*24)|0;
+    }
+  }
+})();
+
+// Canvas + context
+const cv  = document.getElementById('c');
+const ctx = cv.getContext('2d');
+let W=0, H=0, TILE=8;
+
+function resize(){
+  W = cv.width  = window.innerWidth;
+  H = cv.height = window.innerHeight;
+  TILE = Math.max(4, Math.round(W/80)); // ~80 tiles wide on screen
+}
+resize();
+window.addEventListener('resize', resize, {passive:true});
+
+// Camera (world tile coords, can be fractional)
+let camX=0, camXTarget=0;
+let camY=0;
+
+function getCamY(){
+  // Centre world vertically; clamp so we never show void at top/bottom
+  const tilesH = H/TILE;
+  return Math.max(0, Math.min(MAP_H - tilesH, MAP_H/2 - tilesH/2));
+}
+
+// Wandering characters — one cluster per biome × 9
+const CHARS=[];
+for(let i=0;i<45;i++){
+  const bi=i%5;
+  CHARS.push({
+    x: Math.max(2,Math.min(MAP_W-3, SEEDS[bi].x+(fh(i*7,1)-.5)*30)),
+    y: Math.max(2,Math.min(MAP_H-3, SEEDS[bi].y+(fh(i*11,3)-.5)*20)),
+    vx:(fh(i,7)-.5)*.016,
+    vy:(fh(i,11)-.5)*.01,
+    b: bi
+  });
+}
+
+// Gateway arch positions (approximate border crossings)
+const GATES=[
+  {x:58, y:45, c:BASE[0]}, // Pink-Green
+  {x:62, y:19, c:BASE[1]}, // Green-Purple
+  {x:112,y:19, c:BASE[2]}, // Purple-Blue
+  {x:130,y:46, c:BASE[3]}, // Blue-Beige
+  {x:80, y:65, c:BASE[4]}, // Beige-Pink
+];
+
+let nexusPulse=0, lastTS=0;
+
+function frame(ts){
+  const dt = Math.min((ts-lastTS)/1000, .05);
+  lastTS = ts;
+  nexusPulse = (nexusPulse + dt*1.5) % (Math.PI*2);
+
+  // Smooth camera
+  camX += (camXTarget - camX) * Math.min(1, dt*2.8);
+  camY  = getCamY();
+
+  // Background
+  ctx.fillStyle='#03030a';
+  ctx.fillRect(0,0,W,H);
+
+  const tilesW = Math.ceil(W/TILE)+3;
+  const tilesH = Math.ceil(H/TILE)+3;
+  const ty0 = Math.max(0,  Math.floor(camY));
+  const ty1 = Math.min(MAP_H, ty0+tilesH+2);
+  const cxf = Math.floor(camX);
+  const cxFrac = camX - cxf;
+
+  // ── Tiles ────────────────────────────────────────────────
+  for(let ty=ty0; ty<ty1; ty++){
+    const py = ((ty - camY) * TILE) | 0;
+    if(py > H+TILE) continue;
+    for(let qi=0; qi<tilesW; qi++){
+      const tx  = ((cxf+qi) % MAP_W + MAP_W) % MAP_W;
+      const px  = ((qi - cxFrac) * TILE) | 0;
+      if(px > W+TILE || px < -TILE) continue;
+
+      const idx = ty*MAP_W+tx;
+      const b   = biomeMap[idx];
+      const ter = terrMap[idx];
+      let r,g,bl;
+
+      if(ter===4){
+        // Goo — animated pulse
+        const gp = (Math.sin(nexusPulse + tx*.22 + ty*.18)+1)*.5;
+        r  = (62+gp*32)|0;
+        g  = (10+gp*6 )|0;
+        bl = (82+gp*42)|0;
+      } else {
+        const base = ter===1?TREE[b]: ter===2?WATER[b]: ter===3?ROCK[b]: BASE[b];
+        r  = Math.max(0,Math.min(255, base[0]+vrMap[idx]));
+        g  = Math.max(0,Math.min(255, base[1]+vgMap[idx]));
+        bl = Math.max(0,Math.min(255, base[2]+vbMap[idx]));
+      }
+      ctx.fillStyle=`rgb(${r},${g},${bl})`;
+      ctx.fillRect(px, py, TILE, TILE);
+    }
+  }
+
+  // ── Gateway arches ────────────────────────────────────────
+  for(const g of GATES){
+    let gx = g.x - camX;
+    if(gx < -4) gx += MAP_W;
+    if(gx > tilesW+4) gx -= MAP_W;
+    const gpx = (gx * TILE) | 0;
+    const gpy = ((g.y - camY) * TILE) | 0;
+    if(gpx < -TILE*5 || gpx > W+TILE*4 || gpy < -TILE*7 || gpy > H+TILE*4) continue;
+
+    const [cr,cg,cb] = g.c;
+    // Posts
+    ctx.fillStyle=`rgba(${cr},${cg},${cb},.52)`;
+    ctx.fillRect(gpx,           gpy-TILE*3, TILE,   TILE*5);
+    ctx.fillRect(gpx+TILE*2,    gpy-TILE*3, TILE,   TILE*5);
+    // Lintel
+    ctx.fillStyle=`rgba(${cr},${cg},${cb},.68)`;
+    ctx.fillRect(gpx,           gpy-TILE*3, TILE*3, TILE  );
+    // Inner glow
+    ctx.fillStyle=`rgba(${cr},${cg},${cb},.1)`;
+    ctx.fillRect(gpx+2,         gpy-TILE*2+2, TILE*3-4, TILE*4-4);
+    // Highlight edge
+    ctx.fillStyle=`rgba(255,255,255,.14)`;
+    ctx.fillRect(gpx,           gpy-TILE*3, 2, TILE*5);
+    ctx.fillRect(gpx+TILE*3-2,  gpy-TILE*3, 2, TILE*5);
+  }
+
+  // ── Nexus Eye (88, 18) ────────────────────────────────────
+  {
+    const npx = ((NEXUS_X - camX) * TILE) | 0;
+    const npy = ((NEXUS_Y - camY) * TILE) | 0;
+    const pulse = (Math.sin(nexusPulse)+1)*.5;
+
+    // Outer goo glow rings
+    for(let rr=9; rr>0; rr--){
+      const a = ((1-rr/9) * .18 * (0.5+pulse*.5)).toFixed(3);
+      ctx.fillStyle=`rgba(110,15,142,${a})`;
+      const sz = (rr*TILE*1.6) | 0;
+      ctx.fillRect(npx-(sz>>1), npy-(sz>>1), sz, sz);
+    }
+    // Core slab
+    const cs = Math.max(5, (TILE*1.9)|0);
+    ctx.fillStyle=`rgba(185,32,228,${(.46+pulse*.38).toFixed(2)})`;
+    ctx.fillRect(npx-(cs>>1), npy-(cs>>1), cs, cs);
+    // Bright pupil
+    const ps = Math.max(2, (TILE*.55)|0);
+    ctx.fillStyle=`rgba(245,205,255,${(.6+pulse*.3).toFixed(2)})`;
+    ctx.fillRect(npx-(ps>>1), npy-(ps>>1), ps, ps);
+  }
+
+  // ── Characters ───────────────────────────────────────────
+  for(const ch of CHARS){
+    // Wander
+    ch.vx = (ch.vx + (Math.random()-.5)*.003) * .975;
+    ch.vy = (ch.vy + (Math.random()-.5)*.002) * .975;
+    ch.vx = Math.max(-.022, Math.min(.022, ch.vx));
+    ch.vy = Math.max(-.015, Math.min(.015, ch.vy));
+    ch.x += ch.vx;
+    ch.y = Math.max(1, Math.min(MAP_H-2, ch.y+ch.vy));
+    if(ch.x < 0)     ch.x += MAP_W;
+    if(ch.x >= MAP_W) ch.x -= MAP_W;
+
+    // Screen position
+    let scx = ch.x - camX;
+    if(scx < -2) scx += MAP_W;
+    if(scx > tilesW+2) scx -= MAP_W;
+    const cpx = (scx * TILE) | 0;
+    const cpy = ((ch.y - camY) * TILE) | 0;
+    if(cpx < -TILE*2 || cpx > W+TILE*2 || cpy < 0 || cpy > H) continue;
+
+    const [cr,cg,cb] = BASE[ch.b];
+    const cH = Math.max(4, (TILE*.85)|0);
+    const cW = Math.max(2, (TILE*.42)|0);
+    // Head
+    ctx.fillStyle=`rgba(${cr+18},${cg+12},${cb+12},.84)`;
+    ctx.fillRect(cpx, cpy, cW, (cH*.36)|0);
+    // Body
+    ctx.fillStyle=`rgba(${cr},${cg},${cb},.72)`;
+    ctx.fillRect(cpx, cpy+((cH*.36)|0), cW, (cH*.64)|0);
+  }
+
+  // ── Edge vignette (top + bottom) ─────────────────────────
+  const vH = (H*.22)|0;
+  ctx.fillStyle='rgba(3,3,10,.78)';
+  ctx.fillRect(0, 0, W, vH);
+  ctx.fillRect(0, H-vH, W, vH);
+
+  requestAnimationFrame(frame);
+}
+
+// ── Scroll sections ────────────────────────────────────────
+const SECS = [
+  {id:'hero',       f:.00, t:.12},
+  {id:'b0',         f:.10, t:.23},
+  {id:'b1',         f:.22, t:.35},
+  {id:'b2',         f:.34, t:.48},
+  {id:'b3',         f:.47, t:.60},
+  {id:'b4',         f:.59, t:.72},
+  {id:'traveller',  f:.70, t:.81},
+  {id:'lux',        f:.80, t:.91},
+  {id:'nexus-sec',  f:.89, t:.97},
+  {id:'final-sec',  f:.95, t:1.0},
+];
+
+function onScroll(){
+  const total = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  const frac  = Math.min(1, window.scrollY / total);
+
+  // Camera pans east across full world over full scroll
+  camXTarget = frac * MAP_W - (W/TILE)/2;
+
+  // Scroll hint
+  document.getElementById('shint').style.opacity = frac > .018 ? '0' : '1';
+
+  // Title banner fade
+  const banner = document.getElementById('tbanner');
+  const ba = frac < .08 ? 1 : Math.max(0, 1-(frac-.08)/.07);
+  banner.style.opacity = ba;
+
+  // Section overlays
+  SECS.forEach((s,i) => {
+    const el = document.getElementById(s.id);
+    if(!el) return;
+    el.classList.toggle('vis', frac >= s.f && frac <= s.t);
+  });
+
+  // Navigation pips
+  document.querySelectorAll('.pd').forEach((p,i) => {
+    const s = SECS[i];
+    p.classList.toggle('on', s && frac >= s.f && frac <= s.t);
+  });
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+
+// ── Ambient audio ──────────────────────────────────────────
+let ac=null, sOn=false, melNodes=[];
+
+function startSound(){
+  if(!ac) ac = new(window.AudioContext||window.webkitAudioContext)();
+  if(ac.state==='suspended') ac.resume();
+  melNodes.forEach(n=>{try{n.stop();}catch(e){}});
+  melNodes=[];
+
+  const master=ac.createGain();
+  master.gain.value=.055;
+  master.connect(ac.destination);
+
+  function addDrone(freq, det, gain){
+    const o=ac.createOscillator(), gn=ac.createGain();
+    o.type='sine'; o.frequency.value=freq; o.detune.value=det;
+    gn.gain.value=gain; o.connect(gn); gn.connect(master); o.start();
+    melNodes.push(o);
+  }
+  // A minor drone root, fifth, octave
+  addDrone(110,  0, .65);
+  addDrone(110,  6, .35);
+  addDrone(165,  0, .28);
+  addDrone(220, -3, .18);
+
+  // Slow arpeggiated melody (A natural minor scale fragments)
+  const SCALE=[110, 123.47, 130.81, 146.83, 164.81, 174.61, 196, 220];
+  let ni=0;
+  function playNote(){
+    if(!sOn) return;
+    const o=ac.createOscillator(), e=ac.createGain();
+    o.type='triangle';
+    o.frequency.value=SCALE[ni%SCALE.length];
+    e.gain.setValueAtTime(0, ac.currentTime);
+    e.gain.linearRampToValueAtTime(.12, ac.currentTime+.28);
+    e.gain.exponentialRampToValueAtTime(.001, ac.currentTime+3.2);
+    o.connect(e); e.connect(master);
+    o.start(); o.stop(ac.currentTime+3.5);
+    ni++;
+    setTimeout(playNote, 1000+Math.random()*1100);
+  }
+  setTimeout(playNote, 500);
+  sOn=true;
+}
+
+function stopSound(){
+  melNodes.forEach(n=>{try{n.stop(ac.currentTime+.5);}catch(e){}});
+  melNodes=[];
+  sOn=false;
+}
+
+const sBtn=document.getElementById('snd');
+sBtn.addEventListener('click',()=>{
+  if(sOn){ stopSound(); sBtn.classList.remove('on'); sBtn.textContent='♪'; }
+  else   { startSound();sBtn.classList.add('on');    sBtn.textContent='♫'; }
+});
+
+// ── Boot ───────────────────────────────────────────────────
+camXTarget = -(W/TILE)/2 + SEEDS[0].x; // start camera centred on Pink
+camX = camXTarget;
+document.getElementById('hero').classList.add('vis');
+onScroll();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
